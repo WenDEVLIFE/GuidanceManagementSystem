@@ -96,31 +96,73 @@
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="77.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/dashboard.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="STUDENT" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="77.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/students.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button layoutY="630.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="Logout" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="77.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/logout.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button layoutY="177.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="APPOINTMENT" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="77.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/schedule.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button layoutY="225.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="REPORTS" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="77.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/report.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <Button layoutY="273.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="ACCOUNTS" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="77.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </Button>
             <ImageView fitHeight="77.0" fitWidth="86.0" layoutX="46.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
