@@ -19,6 +19,9 @@ public class HelloApplication extends Application {
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.show();
+
+        HelloController controller = fxmlLoader.getController();
+        controller.setStage(stage);
     }
 
     public static void main(String[] args) {

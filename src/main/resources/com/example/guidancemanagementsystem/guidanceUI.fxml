@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="703.0" prefWidth="1008.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guidancemanagementsystem.GuidanceSystemController">
+   <children>
+      <TabPane layoutX="178.0" layoutY="-30.0" prefHeight="734.0" prefWidth="830.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="dashboardTab" text="Dashboard">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="678.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <AnchorPane layoutX="29.0" layoutY="109.0" prefHeight="174.0" prefWidth="237.0" styleClass="greenPanel" stylesheets="@scratch.css">
+                           <children>
+                              <Text fill="#ebe8e8" layoutX="32.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Appointment" wrappingWidth="172.974609375">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#ebe8e8" layoutX="32.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="172.974609375">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <Text layoutX="46.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DASHBOARD" wrappingWidth="172.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <AnchorPane layoutX="297.0" layoutY="109.0" prefHeight="174.0" prefWidth="237.0" styleClass="greenPanel" stylesheets="@scratch.css">
+                           <children>
+                              <Text fill="#ebe8e8" layoutX="32.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Students" wrappingWidth="172.974609375">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#ebe8e8" layoutX="32.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="172.974609375">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="561.0" layoutY="109.0" prefHeight="174.0" prefWidth="237.0" styleClass="greenPanel" stylesheets="@scratch.css">
+                           <children>
+                              <Text fill="#ebe8e8" layoutX="32.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reports" wrappingWidth="172.974609375">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="#ebe8e8" layoutX="32.0" layoutY="95.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" wrappingWidth="172.974609375">
+                                 <font>
+                                    <Font name="Segoe UI Bold" size="23.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </AnchorPane>
+                        <TableView layoutX="48.0" layoutY="353.0" prefHeight="299.0" prefWidth="756.0">
+                          <columns>
+                            <TableColumn prefWidth="179.0" text="Students" />
+                            <TableColumn prefWidth="209.0" text="Date" />
+                              <TableColumn prefWidth="367.0" text="Time" />
+                          </columns>
+                        </TableView>
+                        <Text layoutX="48.0" layoutY="335.0" strokeType="OUTSIDE" strokeWidth="0.0" text="UPCOMING APPOINTMENTS" wrappingWidth="392.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="studentTab" text="STUDENT">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+      <AnchorPane layoutY="-1.0" prefHeight="703.0" prefWidth="182.0" styleClass="blueanchor" stylesheets="@scratch.css">
+         <children>
+            <Button layoutY="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="DASHBOARD" textFill="#fcfafa">
+               <font>
+                  <Font name="Segoe UI Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="STUDENT" textFill="#fcfafa">
+               <font>
+                  <Font name="Segoe UI Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutY="630.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="Logout" textFill="#fcfafa">
+               <font>
+                  <Font name="Segoe UI Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutY="177.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="APPOINTMENT" textFill="#fcfafa">
+               <font>
+                  <Font name="Segoe UI Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutY="225.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="REPORTS" textFill="#fcfafa">
+               <font>
+                  <Font name="Segoe UI Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button layoutY="273.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="ACCOUNTS" textFill="#fcfafa">
+               <font>
+                  <Font name="Segoe UI Bold" size="12.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="77.0" fitWidth="86.0" layoutX="46.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/logo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
