@@ -77,10 +77,10 @@ public class ManageButton extends TableCell<AccountModel, Void> {
             // Set style class for the button based on buttonText
             String buttonText = button.getText();
             if ("Delete".equals(buttonText)) {
-                button.getStyleClass().add("button-red");
+                button.getStyleClass().add("deleteButton");
                 button.setMaxSize(100, 100);
             } else if ("Edit".equals(buttonText)) {
-                button.getStyleClass().add("button-blue");
+                button.getStyleClass().add("editButton");
                 button.setMaxSize(100, 100);
             }
 

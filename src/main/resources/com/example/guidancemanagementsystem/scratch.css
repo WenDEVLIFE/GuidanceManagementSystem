@@ -99,3 +99,21 @@
    .table-view .table-row-cell:selected {
        -fx-background-color: #F39B6D;
    }
+
+   .deleteButton {
+       -fx-background-color: #FF0000;
+       -fx-text-fill: white;
+       -fx-padding: 10px 20px;
+       -fx-font-size: 14px;
+       -fx-border-radius: 5px;
+       -fx-background-radius: 5px;
+   }
+
+   .editButton {
+       -fx-background-color: #FFA500;
+       -fx-text-fill: white;
+       -fx-padding: 10px 20px;
+       -fx-font-size: 14px;
+       -fx-border-radius: 5px;
+       -fx-background-radius: 5px;
+   }
