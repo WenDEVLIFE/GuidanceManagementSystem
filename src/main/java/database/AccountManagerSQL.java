@@ -90,4 +90,28 @@ public class AccountManagerSQL {
             System.out.println(e.getMessage());
         }
     }
+
+    public void updateAccount(Map<String, Object> userData) {
+        String sql = "UPDATE users SET username = ?, password = ?, name = ?, role = ? WHERE user_id = ?";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, (String) userData.get("username"));
+            pstmt.setString(2, (String) userData.get("password"));
+            pstmt.setString(3, (String) userData.get("fullname"));
+            pstmt.setString(4, (String) userData.get("role"));
+            pstmt.setString(5, (String) userData.get("user_id"));
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Account updated successfully.");
+                CustomJDialog.getInstance().showDialog( "Account Updated", "Account updated successfully.");
+            } else {
+                System.out.println("Failed to update account.");
+                CustomJDialog.getInstance().showDialog( "Account Update Failed", "Failed to update account.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

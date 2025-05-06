@@ -29,19 +29,32 @@ public class GuidanceSystemController {
     private TextField nameField;
 
     @FXML
+    private TextField editNameField;
+
+    @FXML
     private TextField usernameField;
 
     @FXML
-    private TextField passwordField;
+    private TextField editUsernameField;
 
     @FXML
     private PasswordField passwordField1;
 
     @FXML
+    private PasswordField editPasswordField;
+
+
+    @FXML
     private PasswordField passwordField2;
 
     @FXML
+    private PasswordField editPasswordField2;
+
+    @FXML
     private ComboBox<String> roleComboBox;
+
+    @FXML
+    private ComboBox<String> editRoleComboBox;
 
     @FXML
     private TabPane tabPane;
@@ -105,6 +118,7 @@ public class GuidanceSystemController {
 
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Student");
         roleComboBox.setItems(roles);
+        editRoleComboBox.setItems(roles);
 
         accountTable.getColumns().clear();
         accountTable.getItems().clear();
@@ -242,7 +256,79 @@ public class GuidanceSystemController {
         // Navigate to the edit account tab
         tabPane.getSelectionModel().select(editAccountTab);
 
+        // Populate the fields with the account data
+        editUsernameField.setText(account.getUsername());
 
+        editNameField.setText(account.getName());
+
+        editPasswordField.setText(account.getPassword());
+
+        editPasswordField2.setText(account.getPassword());
+
+        editRoleComboBox.setValue(account.getRole());
+
+    }
+
+    @FXML
+    public void updateAccount(){
+        String username = editUsernameField.getText();
+
+        String fullname = editNameField.getText();
+
+        String password = editPasswordField.getText();
+
+        String confirm_password = editPasswordField2.getText();
+
+        String role =  editRoleComboBox.getValue();
+
+        if (username.isEmpty() || fullname.isEmpty() || password.isEmpty() || confirm_password.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!password.equals(confirm_password)) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (role == null || role.equals("Select a role")) {
+            JOptionPane.showMessageDialog(null, "Please select a role.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (username.length() < 5) {
+            JOptionPane.showMessageDialog(null, "Username must be at least 5 characters long.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (password.length() < 8) {
+            JOptionPane.showMessageDialog(null, "Password must be at least 8 characters long.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (password.equals(username)) {
+            JOptionPane.showMessageDialog(null, "Password cannot be the same as username.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (fullname.length() < 3) {
+            JOptionPane.showMessageDialog(null, "Full name must be at least 3 characters long.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Map<String, Object> userData = new HashMap<>();
+        userData.put("username", username);
+        userData.put("fullname", fullname);
+        userData.put("password", password);
+        userData.put("role", role);
+
+        AccountManagerSQL.getInstance().updateAccount(userData);
+        editUsernameField.clear();
+        editNameField.clear();
+        editPasswordField.clear();
+        editPasswordField2.clear();
+        editRoleComboBox.setValue("Select a role");
+        tabPane.getSelectionModel().select(accountTab);
     }
 
     public void setRole(String role) {
