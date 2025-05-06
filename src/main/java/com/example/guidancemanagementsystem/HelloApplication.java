@@ -11,7 +11,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/com/example/guidancemanagementsystem/hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("PEÑARANDA OFF-CAMPUS - SCHOOL GUINDANCE MANAGEMENT SYSTEM - LOGIN");
         stage.setScene(scene);
@@ -25,6 +25,10 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        try {
+            launch(args); // Or whatever your main entry point is
+        } catch (Exception e) {
+            e.printStackTrace(); // This will print the full error in the console
+        }
     }
 }
