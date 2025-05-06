@@ -301,7 +301,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutY="315.0" mnemonicParsing="false" onAction="#navigateToAccount" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="ACCOUNTS" textFill="#fcfafa">
+            <Button fx:id="accountBtn" layoutY="315.0" mnemonicParsing="false" onAction="#navigateToAccount" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="ACCOUNTS" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>

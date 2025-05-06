@@ -63,6 +63,9 @@ public class GuidanceSystemController {
     @FXML
     private Tab accountTab;
 
+    @FXML
+    private Button accountBtn;
+
 
 
     public void initialize(){
@@ -193,12 +196,12 @@ public class GuidanceSystemController {
         if (role.equals("Admin")) {
             // Show admin-specific UI elements
             System.out.println("Admin UI elements shown.");
-        } else if (role.equals("Student")) {
-            // Show student-specific UI elements
-            System.out.println("Student UI elements shown.");
+
+            accountBtn.setVisible(true);
         } else {
             // Handle other roles or show a default UI
             System.out.println("Default UI elements shown.");
+            accountBtn.setVisible(false);
         }
     }
 }
