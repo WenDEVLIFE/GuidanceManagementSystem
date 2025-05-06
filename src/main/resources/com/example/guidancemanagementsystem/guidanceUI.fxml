@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -200,7 +201,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
-                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an Account" wrappingWidth="289.974609375">
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a Student" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
@@ -280,6 +281,210 @@
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="editAccountTab1" text="Add Appointment">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an Appointment" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Appointment" />
+                        <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Appointment" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="editRoleComboBox11" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
+                        <DatePicker layoutX="168.0" layoutY="243.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <Text layoutX="170.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editNameField1" layoutX="169.0" layoutY="341.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a time" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="editAccountTab11" text="Edit Appointment">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Appointment" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Appointment" />
+                        <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Appointment" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="editRoleComboBox111" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
+                        <DatePicker layoutX="168.0" layoutY="243.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <Text layoutX="170.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editNameField11" layoutX="169.0" layoutY="341.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a time" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="addAccountTab1" text="Add Student">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Student" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Student" />
+                        <TextField fx:id="nameField1" layoutX="170.0" layoutY="155.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student name" />
+                        <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="usernameField1" layoutX="171.0" layoutY="247.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter your username" />
+                        <Text layoutX="170.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BirthDate" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="171.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Number" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="170.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guardian Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <DatePicker layoutX="171.0" layoutY="342.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <TextField fx:id="usernameField11" layoutX="172.0" layoutY="423.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter guardian name" />
+                        <TextField fx:id="usernameField111" layoutX="171.0" layoutY="511.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter contact number" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="addAccountTab11" text="Edit Student">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Student" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Student" />
+                        <TextField fx:id="nameField11" layoutX="170.0" layoutY="155.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student name" />
+                        <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="usernameField11" layoutX="171.0" layoutY="247.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter your username" />
+                        <Text layoutX="170.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BirthDate" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="171.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Number" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="170.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guardian Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <DatePicker layoutX="171.0" layoutY="342.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <TextField fx:id="usernameField111" layoutX="172.0" layoutY="423.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter guardian name" />
+                        <TextField fx:id="usernameField1111" layoutX="171.0" layoutY="511.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter contact number" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="editAccountTab111" text="Add Violation">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Violations" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Violation" />
+                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="editRoleComboBox1111" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
+                        <Text layoutX="170.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Violation" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editNameField111" layoutX="169.0" layoutY="252.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a violation" />
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="editAccountTab1111" text="Edit Violations">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an Violation" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Violation" />
+                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <ComboBox fx:id="editRoleComboBox11111" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
+                        <Text layoutX="170.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Violation" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="editNameField1111" layoutX="169.0" layoutY="252.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a violation" />
                      </children>
                   </AnchorPane>
                </content>
