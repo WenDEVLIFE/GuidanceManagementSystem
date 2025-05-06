@@ -1,15 +1,24 @@
 package com.example.guidancemanagementsystem;
 
+import database.LoginSQL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class HelloController {
 
     private Stage stage;
+
+    @FXML
+    private TextField usernameField;
+
+    @FXML
+    private PasswordField passwordField;
 
 
     @FXML
@@ -25,19 +34,17 @@ public class HelloController {
     void loginNow(){
       try{
 
-          stage.close();
-          FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("guidanceUI.fxml"));
-          Scene scene = new Scene(fxmlLoader.load());
-          stage.setTitle("PEÑARANDA OFF-CAMPUS - SCHOOL GUINDANCE MANAGEMENT SYSTEM");
-          stage.setScene(scene);
-          stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("/com/example/guidancemanagementsystem/images/logo.png")));
-          stage.setResizable(false);
-          stage.centerOnScreen();
-          stage.show();
+          String username = usernameField.getText();
 
-          GuidanceSystemController controller = fxmlLoader.getController();
-            controller.setStage(stage);
+            String password = passwordField.getText();
 
+            if (username.isEmpty() || password.isEmpty()) {
+                System.out.println("Please fill in all fields.");
+                return;
+
+            }
+
+          LoginSQL.getInstance().LoginUser(username, password, stage);
 
       } catch (Exception e) {
           throw new RuntimeException(e);

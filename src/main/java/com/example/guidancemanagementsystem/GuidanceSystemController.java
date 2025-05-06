@@ -19,6 +19,8 @@ public class GuidanceSystemController {
 
     private Stage stage;
 
+    private  String role;
+
     @FXML
     private TextField nameField;
 
@@ -70,7 +72,7 @@ public class GuidanceSystemController {
 
     }
 
-    void setStage(Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
@@ -183,5 +185,20 @@ public class GuidanceSystemController {
         passwordField1.clear();
         passwordField2.clear();
         roleComboBox.setValue("Select a role");
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+        System.out.println("Role set to: " + role);
+        if (role.equals("Admin")) {
+            // Show admin-specific UI elements
+            System.out.println("Admin UI elements shown.");
+        } else if (role.equals("Student")) {
+            // Show student-specific UI elements
+            System.out.println("Student UI elements shown.");
+        } else {
+            // Handle other roles or show a default UI
+            System.out.println("Default UI elements shown.");
+        }
     }
 }
