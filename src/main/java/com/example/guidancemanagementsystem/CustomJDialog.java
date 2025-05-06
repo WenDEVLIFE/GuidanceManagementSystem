@@ -1,5 +1,8 @@
 package com.example.guidancemanagementsystem;
 
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
 public class CustomJDialog {
     private static volatile CustomJDialog instance;
 
@@ -11,25 +14,10 @@ public class CustomJDialog {
     }
 
     public void showDialog(String title, String message) {
-
-        // Create a new JDialog
-        javax.swing.JDialog dialog = new javax.swing.JDialog();
-        dialog.setTitle(title);
-        dialog.setModal(true);
-        dialog.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        // Create a JLabel to display the message
-        javax.swing.JLabel label = new javax.swing.JLabel(message);
-        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
-        // Add the label to the dialog
-        dialog.getContentPane().add(label, java.awt.BorderLayout.CENTER);
-
-        // Set the size and location of the dialog
-        dialog.setSize(300, 150);
-        dialog.setLocationRelativeTo(null);
-
-        // Show the dialog
-        dialog.setVisible(true);
+        // Create an Alert dialog
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, message, ButtonType.OK);
+        alert.setTitle(title);
+        alert.setHeaderText(null); // No header text
+        alert.showAndWait(); // Show the dialog and wait for user interaction
     }
 }
