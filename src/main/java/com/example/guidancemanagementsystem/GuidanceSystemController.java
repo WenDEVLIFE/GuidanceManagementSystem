@@ -114,8 +114,8 @@ public class GuidanceSystemController {
         userFullNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         userPasswordColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
         userRoleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRole()));
-        EditButtonColumn.setCellFactory(ManageButton.forTableColumn("Edit", accountTable, accountModelObservableList));
-        DeleteButtonColumn.setCellFactory(ManageButton.forTableColumn("Delete", accountTable, accountModelObservableList));
+        EditButtonColumn.setCellFactory(ManageButton.forTableColumn("Edit", accountTable, accountModelObservableList, this));
+        DeleteButtonColumn.setCellFactory(ManageButton.forTableColumn("Delete", accountTable, accountModelObservableList, this));
 
         accountTable.getColumns().addAll(userIdColumn, userNameColumn, userPasswordColumn, userFullNameColumn, userRoleColumn, EditButtonColumn, DeleteButtonColumn);
          loadAccoountData();
@@ -237,6 +237,14 @@ public class GuidanceSystemController {
         roleComboBox.setValue("Select a role");
     }
 
+    @FXML
+    public void navigateToEditAccount(AccountModel account) {
+        // Navigate to the edit account tab
+        tabPane.getSelectionModel().select(editAccountTab);
+
+
+    }
+
     public void setRole(String role) {
         this.role = role;
         System.out.println("Role set to: " + role);
@@ -252,6 +260,7 @@ public class GuidanceSystemController {
         }
     }
 
+    // This will load the user data
     public void loadAccoountData() {
         accountTable.getItems().clear();
         accountModelObservableList.clear();
@@ -276,4 +285,6 @@ public class GuidanceSystemController {
             e.printStackTrace();
         }
     }
+
+
 }

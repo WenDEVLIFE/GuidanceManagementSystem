@@ -1,5 +1,6 @@
 package utils;
 
+import com.example.guidancemanagementsystem.GuidanceSystemController;
 import database.AccountManagerSQL;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -15,7 +16,7 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
     private ObservableList<AccountModel> accountModelObservableList;
 
-    public ManageButton(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList) {
+    public ManageButton(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
         this.button = new Button(buttonText);
         this.accountTable = accountTable;
         this.accountModelObservableList = accountModelObservableList;
@@ -56,6 +57,9 @@ public class ManageButton extends TableCell<AccountModel, Void> {
                         System.out.println("Edit");
 
                         // Go to buy product and get the controller
+                        Platform.runLater(() -> {
+                            controller.navigateToEditAccount(selectItem);
+                        });
 
 
                     });
@@ -90,7 +94,7 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
 
     // Static method to create a callback for the table column
-    public static Callback<TableColumn<AccountModel, Void>, TableCell<AccountModel, Void>> forTableColumn(String buttonText, TableView<AccountModel> ProductTable, ObservableList<AccountModel> productModelObservableList) {
-        return param -> new ManageButton(buttonText, ProductTable, productModelObservableList);
+    public static Callback<TableColumn<AccountModel, Void>, TableCell<AccountModel, Void>> forTableColumn(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
+        return param -> new ManageButton(buttonText, accountTable, accountModelObservableList, controller);
     }
 }
