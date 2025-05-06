@@ -68,6 +68,9 @@ public class GuidanceSystemController {
     private Tab accountTab;
 
     @FXML
+    private Tab editAccountTab;
+
+    @FXML
     private Button accountBtn;
 
     @FXML

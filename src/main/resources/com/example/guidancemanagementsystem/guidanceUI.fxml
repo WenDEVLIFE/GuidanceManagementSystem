@@ -240,6 +240,50 @@
                   </AnchorPane>
                </content>
             </Tab>
+            <Tab fx:id="editAccountTab" text="Edit Account">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
+                     <children>
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Account" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="23.0" />
+                           </font>
+                        </Text>
+                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Account" />
+                        <TextField fx:id="nameField1" layoutX="170.0" layoutY="155.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter your name" />
+                        <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Full Name" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="usernameField1" layoutX="171.0" layoutY="247.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter your username" />
+                        <PasswordField fx:id="passwordField11" layoutX="171.0" layoutY="346.0" prefHeight="37.0" prefWidth="439.0" promptText="Enter your password" />
+                        <ComboBox fx:id="roleComboBox1" layoutX="168.0" layoutY="512.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a role" />
+                        <Text layoutX="170.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="171.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Role" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <PasswordField fx:id="passwordField21" layoutX="171.0" layoutY="425.0" prefHeight="35.0" prefWidth="440.0" promptText="Enter your confirm password" />
+                        <Text layoutX="170.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Confirm Password" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
       <AnchorPane layoutY="-1.0" prefHeight="703.0" prefWidth="182.0" styleClass="blueanchor" stylesheets="@scratch.css">
