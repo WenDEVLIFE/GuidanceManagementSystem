@@ -1,6 +1,8 @@
 package com.example.guidancemanagementsystem;
 
 import database.AccountManagerSQL;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +16,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
+import model.AccountModel;
+import utils.ManageButton;
 
 public class GuidanceSystemController {
 
@@ -66,12 +70,52 @@ public class GuidanceSystemController {
     @FXML
     private Button accountBtn;
 
+    @FXML
+    private TableView<AccountModel> accountTable;
+
+    @FXML
+    private TableColumn<AccountModel, String> userIdColumn;
+
+    @FXML
+    private TableColumn<AccountModel, String> userNameColumn;
+
+    @FXML
+    private TableColumn<AccountModel, String> userRoleColumn;
+
+    @FXML
+    private TableColumn<AccountModel, String> userFullNameColumn;
+
+    @FXML
+    private TableColumn<AccountModel, String> userPasswordColumn;
+
+    @FXML
+    private TableColumn<AccountModel, Void> EditButtonColumn;
+
+    @FXML
+    private TableColumn<AccountModel, Void> DeleteButtonColumn;
+
+    ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
+
 
 
     public void initialize(){
 
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Student");
         roleComboBox.setItems(roles);
+
+        accountTable.getColumns().clear();
+        accountTable.getItems().clear();
+
+        userNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsername()));
+        userIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        userFullNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+        userPasswordColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
+        userRoleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRole()));
+        EditButtonColumn.setCellFactory(ManageButton.forTableColumn("Edit", accountTable, accountModelObservableList));
+        DeleteButtonColumn.setCellFactory(ManageButton.forTableColumn("Delete", accountTable, accountModelObservableList));
+
+        accountTable.getColumns().addAll(userIdColumn, userNameColumn, userPasswordColumn, userFullNameColumn, userRoleColumn, EditButtonColumn, DeleteButtonColumn);
+         loadAccoountData();
 
     }
 
@@ -202,6 +246,31 @@ public class GuidanceSystemController {
             // Handle other roles or show a default UI
             System.out.println("Default UI elements shown.");
             accountBtn.setVisible(false);
+        }
+    }
+
+    public void loadAccoountData() {
+        accountTable.getItems().clear();
+        accountModelObservableList.clear();
+        accountTable.refresh();
+
+        try {
+            ObservableList<Map<String, Object>> accounts = AccountManagerSQL.getInstance().getAllAccounts();
+            if (accounts != null) {
+                for (Map<String, Object> account : accounts) {
+                    String id = (String) account.get("user_id");
+                    String username = (String) account.get("username");
+                    String password = (String) account.get("password");
+                    String name = (String) account.get("name");
+                    String role = (String) account.get("role");
+
+                    AccountModel accountModel = new AccountModel(id, username, password, name, role);
+                    accountModelObservableList.add(accountModel);
+                }
+                accountTable.setItems(accountModelObservableList);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

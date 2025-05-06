@@ -10,14 +10,14 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
     private final Button button;
 
-    private TableView<AccountModel> ProductTable;
+    private TableView<AccountModel> accountTable;
 
-    private ObservableList<AccountModel> productModelObservableList;
+    private ObservableList<AccountModel> accountModelObservableList;
 
-    public ManageButton(String buttonText, TableView<AccountModel> ProductTable, ObservableList<AccountModel> productModelObservableList) {
+    public ManageButton(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList) {
         this.button = new Button(buttonText);
-        this.ProductTable = ProductTable;
-        this.productModelObservableList = productModelObservableList;
+        this.accountTable = accountTable;
+        this.accountModelObservableList = accountModelObservableList;
 
 
         this.button.setOnAction(event -> {
@@ -36,8 +36,8 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
                             Platform.runLater(() -> {
                               //  DeleteDatabaseInstance.getInstance().DeleteProducts(selectItem.getId());
-                                productModelObservableList.remove(selectItem);
-                                ProductTable.refresh();
+                                accountModelObservableList.remove(selectItem);
+                                accountTable.refresh();
 
 
                             });

@@ -1,11 +1,15 @@
 package database;
 
 import com.example.guidancemanagementsystem.CustomJDialog;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javax.swing.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class AccountManagerSQL {
@@ -45,5 +49,27 @@ public class AccountManagerSQL {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public ObservableList <Map<String, Object>> getAllAccounts() {
+        String sql = "SELECT * FROM users";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            ObservableList<Map<String, Object>> accounts = FXCollections.observableArrayList();
+            while (rs.next()) {
+                Map<String, Object> account = new HashMap<>();
+                account.put("user_id", rs.getString("user_id"));
+                account.put("username", rs.getString("username"));
+                account.put("password", rs.getString("password"));
+                account.put("name", rs.getString("name"));
+                account.put("role", rs.getString("role"));
+                accounts.add(account);
+            }
+            return accounts;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
