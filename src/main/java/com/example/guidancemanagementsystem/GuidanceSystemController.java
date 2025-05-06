@@ -1,6 +1,7 @@
 package com.example.guidancemanagementsystem;
 
 import javafx.application.Application;
+import javafx.fxml.FXML;
 import javafx.stage.Stage;
 
 public class GuidanceSystemController {
@@ -16,4 +17,9 @@ public class GuidanceSystemController {
     }
 
 
+
+    @FXML
+    public void onAddAccount(){
+
+    }
 }
