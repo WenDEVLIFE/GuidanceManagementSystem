@@ -7,7 +7,7 @@ import java.sql.SQLException;
 
 public class MYSQLConnection {
 
-    public static String database_url = "jdbc:sqlite:guidance   .db";
+    public static String database_url = "jdbc:sqlite:guidance.db";
 
     private static volatile  MYSQLConnection instance;
 

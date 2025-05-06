@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="703.0" prefWidth="1008.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guidancemanagementsystem.GuidanceSystemController">
    <children>
-      <TabPane layoutX="178.0" layoutY="-30.0" prefHeight="734.0" prefWidth="830.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" layoutX="178.0" layoutY="-30.0" prefHeight="734.0" prefWidth="830.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab fx:id="dashboardTab" text="Dashboard">
             <content>
@@ -107,7 +107,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab fx:id="appointmenTab" text="Appointment">
+            <Tab fx:id="appointmentTab" text="Appointment">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
@@ -171,7 +171,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="accounTab" text="Account">
+            <Tab fx:id="accountTab" text="Account">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
@@ -188,12 +188,12 @@
                               <TableColumn prefWidth="257.0" text="Role" />
                            </columns>
                         </TableView>
-                        <Button layoutX="360.0" layoutY="636.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Accounts" />
+                        <Button layoutX="327.0" layoutY="637.0" mnemonicParsing="false" onAction="#navigateToAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Create Account" />
                      </children>
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab fx:id="addAccountab" text="Add Account">
+            <Tab fx:id="addAccountTab" text="Add Account">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
@@ -241,7 +241,7 @@
       </TabPane>
       <AnchorPane layoutY="-1.0" prefHeight="703.0" prefWidth="182.0" styleClass="blueanchor" stylesheets="@scratch.css">
          <children>
-            <Button layoutY="81.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="DASHBOARD" textFill="#fcfafa">
+            <Button layoutY="81.0" mnemonicParsing="false" onAction="#navigateToDashboard" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="DASHBOARD" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
@@ -253,7 +253,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutY="129.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="STUDENT" textFill="#fcfafa">
+            <Button layoutY="129.0" mnemonicParsing="false" onAction="#navigateToStudent" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="STUDENT" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
@@ -265,7 +265,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutY="630.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="Logout" textFill="#fcfafa">
+            <Button layoutY="630.0" mnemonicParsing="false" onAction="#onLogout" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="Logout" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
@@ -277,7 +277,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutY="177.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="APPOINTMENT" textFill="#fcfafa">
+            <Button layoutY="177.0" mnemonicParsing="false" onAction="#navigateToAppointment" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="APPOINTMENT" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
@@ -289,7 +289,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutX="-7.0" layoutY="273.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="REPORTS" textFill="#fcfafa">
+            <Button layoutX="-7.0" layoutY="273.0" mnemonicParsing="false" onAction="#navigateToReport" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="REPORTS" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
@@ -301,7 +301,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button layoutY="315.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="ACCOUNTS" textFill="#fcfafa">
+            <Button layoutY="315.0" mnemonicParsing="false" onAction="#navigateToAccount" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="ACCOUNTS" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
@@ -318,7 +318,7 @@
                   <Image url="@images/logo.png" />
                </image>
             </ImageView>
-            <Button layoutY="225.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="VIOLATIONS" textFill="#fcfafa">
+            <Button layoutY="225.0" mnemonicParsing="false" onAction="#navigateToViolation" prefHeight="48.0" prefWidth="182.0" styleClass="bluebutton" stylesheets="@scratch.css" text="VIOLATIONS" textFill="#fcfafa">
                <font>
                   <Font name="Segoe UI Bold" size="12.0" />
                </font>
