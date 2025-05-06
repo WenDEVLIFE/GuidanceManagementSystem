@@ -1,5 +1,6 @@
 package utils;
 
+import database.AccountManagerSQL;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -35,7 +36,7 @@ public class ManageButton extends TableCell<AccountModel, Void> {
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                              //  DeleteDatabaseInstance.getInstance().DeleteProducts(selectItem.getId());
+                               AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
                                 accountModelObservableList.remove(selectItem);
                                 accountTable.refresh();
 

@@ -72,4 +72,22 @@ public class AccountManagerSQL {
         }
         return null;
     }
+
+    public void deleteUser(String id) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, id);
+            int rowsAffected = pstmt.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("User deleted successfully.");
+                CustomJDialog.getInstance().showDialog( "User Deleted", "User deleted successfully.");
+            } else {
+                System.out.println("Failed to delete user.");
+                CustomJDialog.getInstance().showDialog( "User Deletion Failed", "Failed to delete user.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
