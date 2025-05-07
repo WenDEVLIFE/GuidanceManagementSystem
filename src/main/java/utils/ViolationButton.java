@@ -6,40 +6,41 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.util.Callback;
-import model.AccountModel;
+import model.StudentModel;
+import model.ViolationModel;
 
-public class ManageButton extends TableCell<AccountModel, Void> {
+public class ViolationButton extends TableCell<ViolationModel, Void> {
 
     private final Button button;
 
-    private TableView<AccountModel> accountTable;
+    private TableView<ViolationModel> violationTable;
 
-    private ObservableList<AccountModel> accountModelObservableList;
+    private ObservableList<ViolationModel> violationObservableList;
 
-    public ManageButton(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
+    public ViolationButton(String buttonText, TableView<ViolationModel> violationTable, ObservableList<ViolationModel> violationObservableList, GuidanceSystemController controller) {
         this.button = new Button(buttonText);
-        this.accountTable = accountTable;
-        this.accountModelObservableList = accountModelObservableList;
+        this.violationTable = violationTable;
+        this.violationObservableList = violationObservableList;
 
 
         this.button.setOnAction(event -> {
-            AccountModel selectItem = getTableRow().getItem();
+            ViolationModel selectItem = getTableRow().getItem();
             if (selectItem != null) {
                 if (buttonText.equals("Delete")) {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
-                    alert.setHeaderText("Delete User");
-                    alert.setContentText("Are you sure you want to delete this user?");
+                    alert.setHeaderText("Delete Report");
+                    alert.setContentText("Are you sure you want to delete this violation?");
                     alert.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
 
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                               AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
-                                accountModelObservableList.remove(selectItem);
-                                accountTable.refresh();
+                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
+                                violationObservableList.remove(selectItem);
+                                violationTable.refresh();
 
 
                             });
@@ -47,10 +48,8 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
                         }
                     });
-
-
                 }
-                // Rent Car function
+
                 else if (buttonText.equals("Edit")) {
 
                     Platform.runLater(() -> {
@@ -58,7 +57,6 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
                         // Go to buy product and get the controller
                         Platform.runLater(() -> {
-                            controller.navigateToEditAccount(selectItem);
                         });
 
 
@@ -66,7 +64,6 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
 
                 }
-
             }
         });
     }
@@ -94,7 +91,7 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
 
     // Static method to create a callback for the table column
-    public static Callback<TableColumn<AccountModel, Void>, TableCell<AccountModel, Void>> forTableColumn(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
-        return param -> new ManageButton(buttonText, accountTable, accountModelObservableList, controller);
+    public static Callback<TableColumn<ViolationModel, Void>, TableCell<ViolationModel, Void>> forTableColumn(String buttonText, TableView<ViolationModel> reportTable, ObservableList<ViolationModel> reportModelObservableList, GuidanceSystemController controller) {
+        return param -> new ViolationButton(buttonText, reportTable, reportModelObservableList, controller);
     }
 }

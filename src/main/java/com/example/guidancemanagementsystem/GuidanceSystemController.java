@@ -1,7 +1,6 @@
 package com.example.guidancemanagementsystem;
 
 import database.AccountManagerSQL;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +16,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import model.AccountModel;
+import utils.AppointmentButton;
 import utils.ManageButton;
 
 public class GuidanceSystemController {

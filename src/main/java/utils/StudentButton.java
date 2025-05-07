@@ -1,45 +1,47 @@
 package utils;
 
+
 import com.example.guidancemanagementsystem.GuidanceSystemController;
 import database.AccountManagerSQL;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.util.Callback;
-import model.AccountModel;
+import model.ReportModel;
+import model.StudentModel;
 
-public class ManageButton extends TableCell<AccountModel, Void> {
+public class StudentButton extends TableCell<StudentModel, Void> {
 
     private final Button button;
 
-    private TableView<AccountModel> accountTable;
+    private TableView<StudentModel> studentTable;
 
-    private ObservableList<AccountModel> accountModelObservableList;
+    private ObservableList<StudentModel> studentModelObservableList;
 
-    public ManageButton(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
+    public StudentButton(String buttonText, TableView<StudentModel> studentTable, ObservableList<StudentModel> studentModelObservableList, GuidanceSystemController controller) {
         this.button = new Button(buttonText);
-        this.accountTable = accountTable;
-        this.accountModelObservableList = accountModelObservableList;
+        this.studentTable = studentTable;
+        this.studentModelObservableList = studentModelObservableList;
 
 
         this.button.setOnAction(event -> {
-            AccountModel selectItem = getTableRow().getItem();
+            StudentModel selectItem = getTableRow().getItem();
             if (selectItem != null) {
                 if (buttonText.equals("Delete")) {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
-                    alert.setHeaderText("Delete User");
-                    alert.setContentText("Are you sure you want to delete this user?");
+                    alert.setHeaderText("Delete Report");
+                    alert.setContentText("Are you sure you want to delete this report?");
                     alert.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
 
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                               AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
-                                accountModelObservableList.remove(selectItem);
-                                accountTable.refresh();
+                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
+                                studentModelObservableList.remove(selectItem);
+                                studentTable.refresh();
 
 
                             });
@@ -47,10 +49,8 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
                         }
                     });
-
-
                 }
-                // Rent Car function
+
                 else if (buttonText.equals("Edit")) {
 
                     Platform.runLater(() -> {
@@ -58,7 +58,6 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
                         // Go to buy product and get the controller
                         Platform.runLater(() -> {
-                            controller.navigateToEditAccount(selectItem);
                         });
 
 
@@ -66,7 +65,6 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
 
                 }
-
             }
         });
     }
@@ -94,7 +92,7 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
 
     // Static method to create a callback for the table column
-    public static Callback<TableColumn<AccountModel, Void>, TableCell<AccountModel, Void>> forTableColumn(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
-        return param -> new ManageButton(buttonText, accountTable, accountModelObservableList, controller);
+    public static Callback<TableColumn<StudentModel, Void>, TableCell<StudentModel, Void>> forTableColumn(String buttonText, TableView<StudentModel> reportTable, ObservableList<StudentModel> reportModelObservableList, GuidanceSystemController controller) {
+        return param -> new StudentButton(buttonText, reportTable, reportModelObservableList, controller);
     }
 }

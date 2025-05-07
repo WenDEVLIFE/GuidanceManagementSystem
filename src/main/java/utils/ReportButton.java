@@ -7,39 +7,40 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 import model.AccountModel;
+import model.ReportModel;
 
-public class ManageButton extends TableCell<AccountModel, Void> {
+public class ReportButton extends TableCell<ReportModel, Void> {
 
     private final Button button;
 
-    private TableView<AccountModel> accountTable;
+    private TableView<ReportModel> reportTable;
 
-    private ObservableList<AccountModel> accountModelObservableList;
+    private ObservableList<ReportModel> reportModelObservableList;
 
-    public ManageButton(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
+    public ReportButton(String buttonText, TableView<ReportModel> reportTable, ObservableList<ReportModel> reportModelObservableList, GuidanceSystemController controller) {
         this.button = new Button(buttonText);
-        this.accountTable = accountTable;
-        this.accountModelObservableList = accountModelObservableList;
+        this.reportTable = reportTable;
+        this.reportModelObservableList = reportModelObservableList;
 
 
         this.button.setOnAction(event -> {
-            AccountModel selectItem = getTableRow().getItem();
+            ReportModel selectItem = getTableRow().getItem();
             if (selectItem != null) {
                 if (buttonText.equals("Delete")) {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
-                    alert.setHeaderText("Delete User");
-                    alert.setContentText("Are you sure you want to delete this user?");
+                    alert.setHeaderText("Delete Report");
+                    alert.setContentText("Are you sure you want to delete this report?");
                     alert.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
 
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                               AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
-                                accountModelObservableList.remove(selectItem);
-                                accountTable.refresh();
+                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
+                                reportModelObservableList.remove(selectItem);
+                                reportTable.refresh();
 
 
                             });
@@ -50,23 +51,6 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
 
                 }
-                // Rent Car function
-                else if (buttonText.equals("Edit")) {
-
-                    Platform.runLater(() -> {
-                        System.out.println("Edit");
-
-                        // Go to buy product and get the controller
-                        Platform.runLater(() -> {
-                            controller.navigateToEditAccount(selectItem);
-                        });
-
-
-                    });
-
-
-                }
-
             }
         });
     }
@@ -94,7 +78,7 @@ public class ManageButton extends TableCell<AccountModel, Void> {
 
 
     // Static method to create a callback for the table column
-    public static Callback<TableColumn<AccountModel, Void>, TableCell<AccountModel, Void>> forTableColumn(String buttonText, TableView<AccountModel> accountTable, ObservableList<AccountModel> accountModelObservableList, GuidanceSystemController controller) {
-        return param -> new ManageButton(buttonText, accountTable, accountModelObservableList, controller);
+    public static Callback<TableColumn<ReportModel, Void>, TableCell<ReportModel, Void>> forTableColumn(String buttonText, TableView<ReportModel> reportTable, ObservableList<ReportModel> reportModelObservableList, GuidanceSystemController controller) {
+        return param -> new ReportButton(buttonText, reportTable, reportModelObservableList, controller);
     }
 }
