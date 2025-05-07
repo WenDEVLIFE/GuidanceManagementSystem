@@ -6,7 +6,7 @@
 }
 
 .blueanchor {
-  -fx-background-color: #0066cc;
+  -fx-background-color: #B7B7B7;
 }
 
 .greenButton {
@@ -38,7 +38,7 @@
 }
 
 .bluebutton {
-  -fx-background-color: #0066cc;
+  -fx-background-color: #B7B7B7;
   -fx-text-fill: white;
     -fx-padding: 10px 20px;
     -fx-font-size: 14px;
@@ -46,7 +46,7 @@
 }
 
 .bluebutton:hover {
-    -fx-background-color: yellow;
+    -fx-background-color: white;
     -fx-text-fill: black;
 }
 
@@ -63,7 +63,7 @@
    }
 
    .table-view .column-header-background {
-       -fx-background-color: #0066cc;
+       -fx-background-color: #B7B7B7;
        -fx-background-radius: 8px 8px 0px 0px;
        -fx-background-inset: 0 0 0 0;
    }

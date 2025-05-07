@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import javax.swing.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.control.*;
@@ -23,6 +24,7 @@ import model.StudentModel;
 import model.ViolationModel;
 import utils.AppointmentButton;
 import utils.ManageButton;
+import utils.StudentButton;
 
 public class GuidanceSystemController {
 
@@ -153,8 +155,34 @@ public class GuidanceSystemController {
     @FXML
     private TableColumn<AccountModel, Void> DeleteButtonColumn;
 
+    @FXML
+    private TableView<StudentModel> studentTable;
+
+    @FXML
+            private TableColumn<StudentModel, String> studentIdColumn;
+
+    @FXML
+            private TableColumn <StudentModel, String> studentNameColumn;
+
+
+    @FXML
+    private TableColumn <StudentModel, String> studentBdateColumn;
+
+    @FXML
+    private TableColumn <StudentModel, String> guardianColumn;
+
+    @FXML
+    private TableColumn <StudentModel, String> studentPnumColumn;
+
+    @FXML
+    private TableColumn <StudentModel, Void> studentEditColumn;
+
+    @FXML
+    private TableColumn <StudentModel, Void> studentDeleteColumn;
+
     ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
 
+    ObservableList <StudentModel> studentModelObservableList = FXCollections.observableArrayList();
 
 
     public void initialize(){
@@ -176,6 +204,20 @@ public class GuidanceSystemController {
 
         accountTable.getColumns().addAll(userIdColumn, userNameColumn, userPasswordColumn, userFullNameColumn, userRoleColumn, EditButtonColumn, DeleteButtonColumn);
          loadAccoountData();
+
+         studentTable.getColumns().clear();
+        studentTable.getItems().clear();
+
+        studentIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        studentBdateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBirthdate()));
+        guardianColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuardianName()));
+        studentPnumColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
+        studentEditColumn.setCellFactory(StudentButton.forTableColumn("Edit", studentTable, studentModelObservableList, this));
+        studentDeleteColumn.setCellFactory(StudentButton.forTableColumn("Delete", studentTable, studentModelObservableList, this));
+
+        studentTable.getColumns().addAll(studentIdColumn, studentNameColumn, studentBdateColumn, guardianColumn, studentPnumColumn, studentEditColumn, studentDeleteColumn);
+        loadStudent();
 
     }
 
@@ -408,29 +450,42 @@ public class GuidanceSystemController {
     }
 
     @FXML
-    public void AddStudent(){
-
-        String student_name  = studentName.getText();
-        String date = String.valueOf(birthDate.getValue());
+    public void AddStudent() {
+        String student_name = studentName.getText();
+        String date = birthDate.getEditor().getText(); // Get the date as a string from the DatePicker editor
         String guardian_name = guardianName.getText();
         String student_phoneNumber = studentPhoneNumber.getText();
 
-        if(student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty()){
+        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty()) {
             CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
-         return;
+            return;
+        }
+
+        // Parse the date in M/d/yyyy format
+        LocalDate parsedDate;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            parsedDate = LocalDate.parse(date, formatter);
+        } catch (Exception e) {
+            CustomJDialog.getInstance().showDialog("Error", "Invalid date format. Please use MM/dd/yyyy.");
+            return;
         }
 
         Map<String, Object> studentData = new HashMap<>();
-        studentData.put("studentName" ,student_name);
-        studentData.put("birthdate", birthDate);
+        studentData.put("studentName", student_name);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        studentData.put("birthdate", parsedDate.format(formatter)); // Convert LocalDate to String
         studentData.put("guardian", guardian_name);
-        studentData.put("phone",student_phoneNumber);
+        studentData.put("phone", student_phoneNumber);
 
         StudentManagerSQL.getInstance().InsertStudent(studentData);
+
+        // Clear the fields
         studentName.setText("");
         guardianName.setText("");
         studentPhoneNumber.setText("");
-        birthDate.setValue(LocalDate.parse(""));
+        birthDate.getEditor().clear(); // Clear the DatePicker editor
+        loadStudent();
     }
 
     public void setRole(String role) {
@@ -456,7 +511,7 @@ public class GuidanceSystemController {
 
         try {
             ObservableList<Map<String, Object>> accounts = AccountManagerSQL.getInstance().getAllAccounts();
-            if (accounts != null) {
+            if (accounts != null && !accounts.isEmpty()) {
                 for (Map<String, Object> account : accounts) {
                     String id = (String) account.get("user_id");
                     String username = (String) account.get("username");
@@ -468,6 +523,35 @@ public class GuidanceSystemController {
                     accountModelObservableList.add(accountModel);
                 }
                 accountTable.setItems(accountModelObservableList);
+            } else {
+                System.out.println("No accounts found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadStudent() {
+        studentTable.getItems().clear();
+        studentModelObservableList.clear();
+        studentTable.refresh();
+
+        try {
+            ObservableList<Map<String, Object>> students = StudentManagerSQL.getInstance().getStudent();
+            if (students != null) {
+
+                for (Map<String, Object> student : students) {
+                    String id = (String) student.get("student_id");
+                    String studentName = (String) student.get("student_name");
+                    String birthdate = (String) student.get("birthdate");
+                    String guardianName = (String) student.get("guardian");
+                    String contactNumber = (String) student.get("contact_number");
+
+                    StudentModel studentModel = new StudentModel(id, studentName, birthdate, guardianName, contactNumber);
+                    studentModelObservableList.add(studentModel);
+                }
+                studentTable.setItems(studentModelObservableList);
+
             }
         } catch (Exception e) {
             e.printStackTrace();

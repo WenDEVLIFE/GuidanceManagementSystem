@@ -58,6 +58,7 @@ public class StudentButton extends TableCell<StudentModel, Void> {
 
                         // Go to buy product and get the controller
                         Platform.runLater(() -> {
+                            controller.navigateToEditStudent(selectItem);
                         });
 
 
