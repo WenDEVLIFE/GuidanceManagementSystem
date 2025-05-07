@@ -16,6 +16,9 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import model.AccountModel;
+import model.AppointmentModel;
+import model.StudentModel;
+import model.ViolationModel;
 import utils.AppointmentButton;
 import utils.ManageButton;
 
@@ -24,6 +27,14 @@ public class GuidanceSystemController {
     private Stage stage;
 
     private  String role;
+
+    private String userId;
+
+    private String studentId;
+
+    private String  violationId;
+
+    private  String appointmentId;
 
     @FXML
     private TextField nameField;
@@ -82,6 +93,24 @@ public class GuidanceSystemController {
 
     @FXML
     private Tab editAccountTab;
+
+    @FXML
+    private Tab addAppointmentTab;
+
+    @FXML
+    private Tab editAppointmentTab;
+
+    @FXML
+    private Tab addViolationTab;
+
+    @FXML
+    private Tab editViolationTab;
+
+    @FXML
+    private Tab addStudentTab;
+
+    @FXML
+    private Tab editStudentTab;
 
     @FXML
     private Button accountBtn;
@@ -175,6 +204,57 @@ public class GuidanceSystemController {
         tabPane.getSelectionModel().select(accountTab);
     }
 
+    @FXML
+    public void navigateToAddAppointment() {
+        tabPane.getSelectionModel().select(addAppointmentTab);
+    }
+
+    @FXML
+    public void navigateToEditAppointment(AppointmentModel appointment) {
+        tabPane.getSelectionModel().select(editAppointmentTab);
+    }
+
+    @FXML
+    public void navigateToAddViolation() {
+        tabPane.getSelectionModel().select(addViolationTab);
+    }
+
+    @FXML
+    public void navigateToEditViolation(ViolationModel violation) {
+        tabPane.getSelectionModel().select(editViolationTab);
+    }
+
+    @FXML
+    public void navigateToAddStudent() {
+        tabPane.getSelectionModel().select(addStudentTab);
+    }
+
+    @FXML
+    public void navigateToEditStudent(StudentModel students) {
+        tabPane.getSelectionModel().select(editStudentTab);
+    }
+
+    @FXML
+    public void navigateToEditAccount(AccountModel account) {
+        // Navigate to the edit account tab
+        tabPane.getSelectionModel().select(editAccountTab);
+
+        // Populate the fields with the account data
+        editUsernameField.setText(account.getUsername());
+
+        editNameField.setText(account.getName());
+
+        editPasswordField.setText(account.getPassword());
+
+        editPasswordField2.setText(account.getPassword());
+
+        editRoleComboBox.setValue(account.getRole());
+
+        // Store the user ID for later use
+        userId = account.getId();
+
+    }
+
 
 
     @FXML
@@ -250,25 +330,6 @@ public class GuidanceSystemController {
         passwordField2.clear();
         roleComboBox.setValue("Select a role");
     }
-
-    @FXML
-    public void navigateToEditAccount(AccountModel account) {
-        // Navigate to the edit account tab
-        tabPane.getSelectionModel().select(editAccountTab);
-
-        // Populate the fields with the account data
-        editUsernameField.setText(account.getUsername());
-
-        editNameField.setText(account.getName());
-
-        editPasswordField.setText(account.getPassword());
-
-        editPasswordField2.setText(account.getPassword());
-
-        editRoleComboBox.setValue(account.getRole());
-
-    }
-
     @FXML
     public void updateAccount(){
         String username = editUsernameField.getText();
@@ -321,6 +382,7 @@ public class GuidanceSystemController {
         userData.put("fullname", fullname);
         userData.put("password", password);
         userData.put("role", role);
+        userData.put("user_id", userId);
 
         AccountManagerSQL.getInstance().updateAccount(userData);
         editUsernameField.clear();

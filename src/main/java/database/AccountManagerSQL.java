@@ -93,13 +93,14 @@ public class AccountManagerSQL {
 
     public void updateAccount(Map<String, Object> userData) {
         String sql = "UPDATE users SET username = ?, password = ?, name = ?, role = ? WHERE user_id = ?";
+        int userId = Integer.parseInt((String) userData.get("user_id"));
         try (Connection conn = MYSQLConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, (String) userData.get("username"));
             pstmt.setString(2, (String) userData.get("password"));
             pstmt.setString(3, (String) userData.get("fullname"));
             pstmt.setString(4, (String) userData.get("role"));
-            pstmt.setString(5, (String) userData.get("user_id"));
+            pstmt.setInt(5, userId);
 
             int rowsAffected = pstmt.executeUpdate();
 
