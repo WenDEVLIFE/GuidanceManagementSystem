@@ -353,42 +353,36 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
-                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Student" wrappingWidth="289.974609375">
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an Student" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Student" />
-                        <TextField fx:id="nameField1" layoutX="170.0" layoutY="155.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student name" />
-                        <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="289.974609375">
-                           <font>
-                              <Font name="Segoe UI Bold" size="15.0" />
-                           </font>
-                        </Text>
+                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#AddStudent" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Student" />
+                        <TextField fx:id="studentName" layoutX="170.0" layoutY="155.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student name" />
                         <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="usernameField1" layoutX="171.0" layoutY="247.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter your username" />
-                        <Text layoutX="170.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BirthDate" wrappingWidth="289.974609375">
+                        <Text layoutX="169.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="BirthDate" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Text layoutX="171.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Number" wrappingWidth="289.974609375">
+                        <Text layoutX="170.0" layoutY="396.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contact Number" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Text layoutX="170.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guardian Name" wrappingWidth="289.974609375">
+                        <Text layoutX="169.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Guardian Name" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <DatePicker layoutX="171.0" layoutY="342.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
-                        <TextField fx:id="usernameField11" layoutX="172.0" layoutY="423.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter guardian name" />
-                        <TextField fx:id="usernameField111" layoutX="171.0" layoutY="511.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter contact number" />
+                        <DatePicker fx:id="birthDate" layoutX="170.0" layoutY="245.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <TextField fx:id="guardianName" layoutX="171.0" layoutY="326.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter guardian name" />
+                        <TextField fx:id="studentPhoneNumber" layoutX="170.0" layoutY="414.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter contact number" />
                      </children>
                   </AnchorPane>
                </content>

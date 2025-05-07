@@ -1,6 +1,7 @@
 package com.example.guidancemanagementsystem;
 
 import database.AccountManagerSQL;
+import database.StudentManagerSQL;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -9,6 +10,7 @@ import javafx.stage.Stage;
 
 
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.control.*;
@@ -66,6 +68,18 @@ public class GuidanceSystemController {
 
     @FXML
     private ComboBox<String> editRoleComboBox;
+
+    @FXML
+    private TextField studentName;
+
+    @FXML
+    private TextField guardianName;
+
+    @FXML
+    private DatePicker birthDate;
+
+    @FXML
+    private TextField studentPhoneNumber;
 
     @FXML
     private TabPane tabPane;
@@ -391,6 +405,32 @@ public class GuidanceSystemController {
         editPasswordField2.clear();
         editRoleComboBox.setValue("Select a role");
         tabPane.getSelectionModel().select(accountTab);
+    }
+
+    @FXML
+    public void AddStudent(){
+
+        String student_name  = studentName.getText();
+        String date = String.valueOf(birthDate.getValue());
+        String guardian_name = guardianName.getText();
+        String student_phoneNumber = studentPhoneNumber.getText();
+
+        if(student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty()){
+            CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
+         return;
+        }
+
+        Map<String, Object> studentData = new HashMap<>();
+        studentData.put("studentName" ,student_name);
+        studentData.put("birthdate", birthDate);
+        studentData.put("guardian", guardian_name);
+        studentData.put("phone",student_phoneNumber);
+
+        StudentManagerSQL.getInstance().InsertStudent(studentData);
+        studentName.setText("");
+        guardianName.setText("");
+        studentPhoneNumber.setText("");
+        birthDate.setValue(LocalDate.parse(""));
     }
 
     public void setRole(String role) {
