@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="505.0" prefWidth="740.0" styleClass="anchorpane" stylesheets="@scratch.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.guidancemanagementsystem.AgreementController">
+   <children>
+      <ImageView fitHeight="100.0" fitWidth="110.0" layoutX="66.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/logo.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="232.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PEÑARANDA OFF-CAMPUS">
+         <font>
+            <Font name="Segoe UI Bold" size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="263.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SCHOOL GUIDANCE MANAGEMENT SYSTEM">
+         <font>
+            <Font name="Segoe UI Bold" size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="155.0" layoutY="177.0" strokeType="OUTSIDE" strokeWidth="0.0" text="1.Use the system  for official Guidance Services only.">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="155.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2.Ensure all information you provide is accurate.">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="155.0" layoutY="271.0" strokeType="OUTSIDE" strokeWidth="0.0" text="3.Allow the system to process your data in compliance with the data  Privacy Act." wrappingWidth="408.4013671875">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="155.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="4.Follow system rules and avoid misuse." wrappingWidth="408.4013671875">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="190.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you agree to these terms and conditions?" wrappingWidth="408.4013671875">
+         <font>
+            <Font name="Segoe UI Bold" size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="77.0" layoutY="435.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="130.0" styleClass="greenButton" stylesheets="@scratch.css" text="Agree" />
+      <Button layoutX="513.0" layoutY="435.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="130.0" styleClass="deleteButton" stylesheets="@scratch.css" text="Disagree" />
+   </children>
+</AnchorPane>

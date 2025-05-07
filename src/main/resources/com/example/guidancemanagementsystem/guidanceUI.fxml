@@ -203,7 +203,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
-                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a Student" wrappingWidth="289.974609375">
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an Account" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
@@ -463,7 +463,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
-                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an Violation" wrappingWidth="289.974609375">
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Violations" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
@@ -474,13 +474,13 @@
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="editRoleComboBox11111" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
                         <Text layoutX="170.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Violation" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
                         <TextField fx:id="editNameField1111" layoutX="169.0" layoutY="252.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a violation" />
+                        <TextField fx:id="editNameField11111" layoutX="169.0" layoutY="151.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student name" />
                      </children>
                   </AnchorPane>
                </content>
