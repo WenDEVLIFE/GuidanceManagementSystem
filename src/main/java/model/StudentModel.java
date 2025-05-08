@@ -12,12 +12,15 @@ public class StudentModel {
 
     String phoneNumber;
 
-    public  StudentModel(String id, String studentName, String Birthdate, String guardianName, String phoneNumber) {
+    String yearAndSection;
+
+    public  StudentModel(String id, String studentName, String Birthdate, String guardianName, String phoneNumber, String yearAndSection) {
         this.id = id;
         this.studentName = studentName;
         this.Birthdate = Birthdate;
         this.guardianName = guardianName;
         this.phoneNumber = phoneNumber;
+        this.yearAndSection = yearAndSection;
     }
 
     public String getId() {
@@ -60,6 +63,16 @@ public class StudentModel {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getYearAndSection() {
+        return yearAndSection;
+    }
+
+    public void setYearAndSection(String yearAndSection) {
+        this.yearAndSection = yearAndSection;
+    }
+
+
+
     @Override
     public String toString() {
         return "StudentModel{" +
@@ -68,6 +81,7 @@ public class StudentModel {
                 ", Birthdate='" + Birthdate + '\'' +
                 ", guardianName='" + guardianName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", yearAndSection='" + yearAndSection + '\'' +
                 '}';
     }
 }

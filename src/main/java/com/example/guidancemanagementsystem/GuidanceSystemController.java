@@ -84,6 +84,9 @@ public class GuidanceSystemController {
     private TextField studentPhoneNumber;
 
     @FXML
+    private TextField yearAndSection;
+
+    @FXML
     private TabPane tabPane;
 
     @FXML
@@ -175,6 +178,9 @@ public class GuidanceSystemController {
     private TableColumn <StudentModel, String> studentPnumColumn;
 
     @FXML
+    private TableColumn <StudentModel, String> yearAndSectionColumn;
+
+    @FXML
     private TableColumn <StudentModel, Void> studentEditColumn;
 
     @FXML
@@ -198,8 +204,7 @@ public class GuidanceSystemController {
         userIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
         userFullNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
         userPasswordColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPassword()));
-        userRoleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRole()));
-        EditButtonColumn.setCellFactory(ManageButton.forTableColumn("Edit", accountTable, accountModelObservableList, this));
+        userRoleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRole()));EditButtonColumn.setCellFactory(ManageButton.forTableColumn("Edit", accountTable, accountModelObservableList, this));
         DeleteButtonColumn.setCellFactory(ManageButton.forTableColumn("Delete", accountTable, accountModelObservableList, this));
 
         accountTable.getColumns().addAll(userIdColumn, userNameColumn, userPasswordColumn, userFullNameColumn, userRoleColumn, EditButtonColumn, DeleteButtonColumn);
@@ -213,10 +218,11 @@ public class GuidanceSystemController {
         studentBdateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBirthdate()));
         guardianColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuardianName()));
         studentPnumColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPhoneNumber()));
+        yearAndSectionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getYearAndSection()));
         studentEditColumn.setCellFactory(StudentButton.forTableColumn("Edit", studentTable, studentModelObservableList, this));
         studentDeleteColumn.setCellFactory(StudentButton.forTableColumn("Delete", studentTable, studentModelObservableList, this));
 
-        studentTable.getColumns().addAll(studentIdColumn, studentNameColumn, studentBdateColumn, guardianColumn, studentPnumColumn, studentEditColumn, studentDeleteColumn);
+        studentTable.getColumns().addAll(studentIdColumn, studentNameColumn, studentBdateColumn, guardianColumn, studentPnumColumn, yearAndSectionColumn, studentEditColumn, studentDeleteColumn);
         loadStudent();
 
     }
@@ -455,8 +461,9 @@ public class GuidanceSystemController {
         String date = birthDate.getEditor().getText(); // Get the date as a string from the DatePicker editor
         String guardian_name = guardianName.getText();
         String student_phoneNumber = studentPhoneNumber.getText();
+        String year_and_section = yearAndSection.getText();
 
-        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty()) {
+        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty()) {
             CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
             return;
         }
@@ -477,6 +484,7 @@ public class GuidanceSystemController {
         studentData.put("birthdate", parsedDate.format(formatter)); // Convert LocalDate to String
         studentData.put("guardian", guardian_name);
         studentData.put("phone", student_phoneNumber);
+        studentData.put("yearAndSection", year_and_section);
 
         StudentManagerSQL.getInstance().InsertStudent(studentData);
 
@@ -546,8 +554,9 @@ public class GuidanceSystemController {
                     String birthdate = (String) student.get("birthdate");
                     String guardianName = (String) student.get("guardian");
                     String contactNumber = (String) student.get("contact_number");
+                    String yearAndSection = (String) student.get("year_and_section");
 
-                    StudentModel studentModel = new StudentModel(id, studentName, birthdate, guardianName, contactNumber);
+                    StudentModel studentModel = new StudentModel(id, studentName, birthdate, guardianName, contactNumber, yearAndSection);
                     studentModelObservableList.add(studentModel);
                 }
                 studentTable.setItems(studentModelObservableList);

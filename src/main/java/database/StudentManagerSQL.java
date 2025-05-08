@@ -29,13 +29,14 @@ public class StudentManagerSQL {
     }
 
      public void InsertStudent(Map<String, Object> studentData){
-        String insertStudent = "INSERT INTO students (student_name, birthdate, guardian, contact_number) VALUES (?, ?, ?, ?)";
+        String insertStudent = "INSERT INTO students (student_name, birthdate, guardian, contact_number, year_and_section) VALUES (?, ?, ?, ?, ?)";
          try (Connection conn = MYSQLConnection.getConnection();
               PreparedStatement pstmt = conn.prepareStatement(insertStudent)) {
              pstmt.setString(1, (String) studentData.get("studentName"));
              pstmt.setString(2, (String) studentData.get("birthdate"));
              pstmt.setString(3, (String) studentData.get("guardian"));
              pstmt.setString(4, (String) studentData.get("phone"));
+                pstmt.setString(5, (String) studentData.get("yearAndSection"));
 
              int rowsAffected = pstmt.executeUpdate();
 
@@ -65,6 +66,7 @@ public class StudentManagerSQL {
                  account.put("guardian", rs.getString("guardian"));
                  account.put("contact_number", rs.getString("contact_number"));
                  account.put("birthdate", rs.getString("birthdate"));
+                 account.put("year_and_section", rs.getString("year_and_section"));
                  accounts.add(account);
              }
              return accounts;
