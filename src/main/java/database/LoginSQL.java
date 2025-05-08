@@ -1,5 +1,6 @@
 package database;
 
+import com.example.guidancemanagementsystem.AgreementController;
 import com.example.guidancemanagementsystem.CustomJDialog;
 import com.example.guidancemanagementsystem.GuidanceSystemController;
 import com.example.guidancemanagementsystem.HelloApplication;
@@ -47,7 +48,7 @@ public class LoginSQL {
                 CustomJDialog.getInstance().showDialog( "Login Successful", "Login successful.");
 
                 stage.close();
-                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("guidanceUI.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("agreementUI.fxml"));
                 Scene scene = new Scene(fxmlLoader.load());
                 stage.setTitle("PEÑARANDA OFF-CAMPUS - SCHOOL GUINDANCE MANAGEMENT SYSTEM");
                 stage.setScene(scene);
@@ -56,7 +57,7 @@ public class LoginSQL {
                 stage.centerOnScreen();
                 stage.show();
 
-                GuidanceSystemController controller = fxmlLoader.getController();
+                AgreementController controller = fxmlLoader.getController();
                 controller.setStage(stage);
                 controller.setRole(role);
 
