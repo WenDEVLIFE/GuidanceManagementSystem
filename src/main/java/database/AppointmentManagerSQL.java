@@ -1,7 +1,6 @@
-package utils;
+package database;
 
 import com.example.guidancemanagementsystem.CustomJDialog;
-import database.MYSQLConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -9,7 +8,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.SimpleFormatter;
 
 public class AppointmentManagerSQL {
 
@@ -30,6 +28,7 @@ public class AppointmentManagerSQL {
 
     public void InsertAppointment(Map<String, Object> appointmentData) {
         String insertAppointment = "INSERT INTO appointment_table (student_name, date_submitted, date_of_appointment, time) VALUES (?, ?, ?, ?)";
+        String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
         try (var conn = MYSQLConnection.getConnection();
              var pstmt = conn.prepareStatement(insertAppointment)) {
             pstmt.setString(1, (String) appointmentData.get("studentName"));
@@ -46,6 +45,16 @@ public class AppointmentManagerSQL {
             if (rowsAffected > 0) {
                 System.out.println("Appointment created successfully.");
                 CustomJDialog.getInstance().showDialog("Appointment Created", "Appointment created successfully.");
+
+                try (var pstmtReports = conn.prepareStatement(insertReports)) {
+                    pstmtReports.setString(1, "Appointment with ID " + appointmentData.get("appointmentId") + " was created.");
+                    LocalDate datestrReport = LocalDate.now();
+                    DateTimeFormatter formatterReport = DateTimeFormatter.ofPattern("M/d/yyyy");
+                    String formattedDateReport = datestrReport.format(formatterReport);
+                    pstmtReports.setString(2, formattedDateReport);
+                    pstmtReports.setString(3, java.time.LocalTime.now().toString());
+                    pstmtReports.executeUpdate();
+                }
             } else {
                 System.out.println("Failed to create appointment.");
                 CustomJDialog.getInstance().showDialog("Appointment Creation Failed", "Failed to create appointment.");
@@ -105,6 +114,7 @@ public class AppointmentManagerSQL {
 
     public void deleteAppointment(String id) {
         String deleteAppointment = "DELETE FROM appointment_table WHERE appointment_id = ?";
+        String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
         try (var conn = MYSQLConnection.getConnection();
              var pstmt = conn.prepareStatement(deleteAppointment)) {
             pstmt.setString(1, id);
@@ -114,6 +124,15 @@ public class AppointmentManagerSQL {
             if (rowsAffected > 0) {
                 System.out.println("Appointment deleted successfully.");
                 CustomJDialog.getInstance().showDialog("Appointment Deleted", "Appointment deleted successfully.");
+                try (var pstmtReports = conn.prepareStatement(insertReports)) {
+                    pstmtReports.setString(1, "Appointment with ID " + id + " was deleted.");
+                    LocalDate datestr = LocalDate.now();
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+                    String formattedDate = datestr.format(formatter);
+                    pstmtReports.setString(2, formattedDate);
+                    pstmtReports.setString(3, java.time.LocalTime.now().toString());
+                    pstmtReports.executeUpdate();
+                }
             } else {
                 System.out.println("Failed to delete appointment.");
                 CustomJDialog.getInstance().showDialog("Appointment Deletion Failed", "Failed to delete appointment.");

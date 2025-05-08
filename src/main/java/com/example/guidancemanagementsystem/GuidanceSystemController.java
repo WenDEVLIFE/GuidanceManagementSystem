@@ -23,7 +23,7 @@ import model.AppointmentModel;
 import model.StudentModel;
 import model.ViolationModel;
 import utils.AppointmentButton;
-import utils.AppointmentManagerSQL;
+import database.AppointmentManagerSQL;
 import utils.ManageButton;
 import utils.StudentButton;
 

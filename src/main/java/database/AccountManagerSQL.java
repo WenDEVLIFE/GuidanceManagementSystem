@@ -30,6 +30,7 @@ public class AccountManagerSQL {
     // This will be used to add a new account
     public void AddAccount(Map<String, Object> userData){
         String sql = "INSERT INTO users (username, password, name, role) VALUES (?, ?, ?, ?)";
+        String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
         try (Connection conn = MYSQLConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, (String) userData.get("username"));
@@ -42,6 +43,13 @@ public class AccountManagerSQL {
             if (rowsAffected > 0) {
                 System.out.println("Account created successfully.");
                 CustomJDialog.getInstance().showDialog( "Account Created", "Account created successfully.");
+
+                try (PreparedStatement reportPstmt = conn.prepareStatement(insertReports)) {
+                    reportPstmt.setString(1, "Account with username " + userData.get("username") + " was created.");
+                    reportPstmt.setString(2, String.valueOf(java.time.LocalDate.now()));
+                    reportPstmt.setString(3, String.valueOf(java.time.LocalTime.now()));
+                    reportPstmt.executeUpdate();
+                }
             } else {
                 System.out.println("Failed to create account.");
                 CustomJDialog.getInstance().showDialog( "Account Creation Failed", "Failed to create account.");
@@ -75,6 +83,7 @@ public class AccountManagerSQL {
 
     public void deleteUser(String id) {
         String sql = "DELETE FROM users WHERE user_id = ?";
+        String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
         try (Connection conn = MYSQLConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, id);
@@ -82,6 +91,13 @@ public class AccountManagerSQL {
             if (rowsAffected > 0) {
                 System.out.println("User deleted successfully.");
                 CustomJDialog.getInstance().showDialog( "User Deleted", "User deleted successfully.");
+
+                try (PreparedStatement reportPstmt = conn.prepareStatement(insertReports)) {
+                    reportPstmt.setString(1, "User with ID " + id + " was deleted.");
+                    reportPstmt.setString(2, String.valueOf(java.time.LocalDate.now()));
+                    reportPstmt.setString(3, String.valueOf(java.time.LocalTime.now()));
+                    reportPstmt.executeUpdate();
+                }
             } else {
                 System.out.println("Failed to delete user.");
                 CustomJDialog.getInstance().showDialog( "User Deletion Failed", "Failed to delete user.");

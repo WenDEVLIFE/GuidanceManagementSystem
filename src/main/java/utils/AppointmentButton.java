@@ -2,12 +2,11 @@ package utils;
 
 
 import com.example.guidancemanagementsystem.GuidanceSystemController;
-import database.AccountManagerSQL;
+import database.AppointmentManagerSQL;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
 import javafx.util.Callback;
-import model.AccountModel;
 import model.AppointmentModel;
 
 public class AppointmentButton extends TableCell<AppointmentModel, Void> {

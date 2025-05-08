@@ -30,7 +30,8 @@ public class StudentManagerSQL {
 
      public void InsertStudent(Map<String, Object> studentData){
         String insertStudent = "INSERT INTO students (student_name, birthdate, guardian, contact_number, year_and_section) VALUES (?, ?, ?, ?, ?)";
-         try (Connection conn = MYSQLConnection.getConnection();
+         String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
+        try (Connection conn = MYSQLConnection.getConnection();
               PreparedStatement pstmt = conn.prepareStatement(insertStudent)) {
              pstmt.setString(1, (String) studentData.get("studentName"));
              pstmt.setString(2, (String) studentData.get("birthdate"));
@@ -43,6 +44,13 @@ public class StudentManagerSQL {
              if (rowsAffected > 0) {
                  System.out.println("Account created successfully.");
                  CustomJDialog.getInstance().showDialog( "Student Created", "Student created successfully.");
+
+                    try (PreparedStatement reportPstmt = conn.prepareStatement(insertReports)) {
+                        reportPstmt.setString(1, "Student with ID " + studentData.get("studentId") + " was created.");
+                        reportPstmt.setString(2, String.valueOf(java.time.LocalDate.now()));
+                        reportPstmt.setString(3, String.valueOf(java.time.LocalTime.now()));
+                        reportPstmt.executeUpdate();
+                    }
              } else {
                  System.out.println("Failed to create account.");
                  CustomJDialog.getInstance().showDialog( "Student Creation Failed", "Failed to create student.");
@@ -103,6 +111,7 @@ public class StudentManagerSQL {
 
     public void deleteStudent(String id) {
         String deleteStudent = "DELETE FROM students WHERE student_id = ?";
+        String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
         try (Connection conn = MYSQLConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(deleteStudent)) {
             pstmt.setString(1, id);
@@ -112,6 +121,13 @@ public class StudentManagerSQL {
             if (rowsAffected > 0) {
                 System.out.println("Account deleted successfully.");
                 CustomJDialog.getInstance().showDialog( "Student Deleted", "Student deleted successfully.");
+
+                try (PreparedStatement reportPstmt = conn.prepareStatement(insertReports)) {
+                    reportPstmt.setString(1, "Student with ID " + id + " was deleted.");
+                    reportPstmt.setString(2, String.valueOf(java.time.LocalDate.now()));
+                    reportPstmt.setString(3, String.valueOf(java.time.LocalTime.now()));
+                    reportPstmt.executeUpdate();
+                }
             } else {
                 System.out.println("Failed to delete account.");
                 CustomJDialog.getInstance().showDialog( "Student Deletion Failed", "Failed to delete student.");
