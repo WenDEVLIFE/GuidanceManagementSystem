@@ -10,15 +10,17 @@ public class ViolationModel {
 
     String dateSubmitted;
 
-    String violation;
+    String violationType;
 
-    public  ViolationModel(String id, String studentName, String dateSubmitted, String violation) {
+    String description;
+
+    public  ViolationModel(String id, String studentName, String dateSubmitted, String violationType, String description) {
         this.id = id;
         this.studentName = studentName;
         this.dateSubmitted = dateSubmitted;
-        this.violation = violation;
+        this.violationType = violationType;
+        this.description = description;
     }
-
 
     public String getId() {
         return id;
@@ -44,12 +46,20 @@ public class ViolationModel {
         this.dateSubmitted = dateSubmitted;
     }
 
-    public String getViolation() {
-        return violation;
+    public String getViolationType() {
+        return violationType;
     }
 
-    public void setViolation(String violation) {
-        this.violation = violation;
+    public void setViolationType(String violationType) {
+        this.violationType = violationType;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
@@ -58,7 +68,8 @@ public class ViolationModel {
                 "id='" + id + '\'' +
                 ", studentName='" + studentName + '\'' +
                 ", dateSubmitted='" + dateSubmitted + '\'' +
-                ", violation='" + violation + '\'' +
+                ", violationType='" + violationType + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

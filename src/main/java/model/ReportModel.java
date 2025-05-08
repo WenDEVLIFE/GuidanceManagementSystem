@@ -6,9 +6,15 @@ public class ReportModel {
 
     String description;
 
-    public  ReportModel(String id, String description) {
+    String time;
+
+    String date;
+
+    public ReportModel(String id, String description, String time, String date) {
         this.id = id;
         this.description = description;
+        this.time = time;
+        this.date = date;
     }
 
     public String getId() {
@@ -27,11 +33,29 @@ public class ReportModel {
         this.description = description;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "ReportModel{" +
                 "id='" + id + '\'' +
                 ", description='" + description + '\'' +
+                ", time='" + time + '\'' +
+                ", date='" + date + '\'' +
                 '}';
     }
 }
