@@ -172,8 +172,9 @@
                         </Text>
                         <TableView layoutX="31.0" layoutY="129.0" prefHeight="486.0" prefWidth="756.0">
                            <columns>
-                              <TableColumn prefWidth="79.0" text="Report ID" />
-                              <TableColumn prefWidth="675.0" text="Description" />
+                              <TableColumn prefWidth="111.33335876464844" text="Report ID" />
+                              <TableColumn prefWidth="525.9999389648438" text="Description" />
+                              <TableColumn prefWidth="108.6666259765625" text="Delete" />
                            </columns>
                         </TableView>
                      </children>
@@ -258,7 +259,7 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#updateStudent" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Account" />
+                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#updateAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Account" />
                         <TextField fx:id="editNameField" layoutX="170.0" layoutY="155.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter your name" />
                         <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="289.974609375">
                            <font>
@@ -334,7 +335,7 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Appointment" />
+                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#updateAppointment" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Appointment" />
                         <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Appointment" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
@@ -345,14 +346,14 @@
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="editRoleComboBox111" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
-                        <DatePicker layoutX="168.0" layoutY="243.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <DatePicker fx:id="editAppointmentDate" layoutX="168.0" layoutY="243.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
                         <Text layoutX="170.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="editNameField11" layoutX="169.0" layoutY="341.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a time" />
+                        <TextField fx:id="editAppointmentTime" layoutX="169.0" layoutY="341.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a time" />
+                        <TextField fx:id="editAppointmentStudentName" editable="false" layoutX="169.0" layoutY="160.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a student name" />
                      </children>
                   </AnchorPane>
                </content>
@@ -410,7 +411,7 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="321.0" layoutY="615.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Student" />
+                        <Button layoutX="321.0" layoutY="615.0" mnemonicParsing="false" onAction="#updateStudent" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Student" />
                         <TextField fx:id="editStudentName" layoutX="170.0" layoutY="129.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student name" />
                         <Text layoutX="170.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
                            <font>

@@ -111,6 +111,15 @@ public class GuidanceSystemController {
     private TextField timeOfAppointment;
 
     @FXML
+    private TextField editAppointmentStudentName;
+
+    @FXML
+    private DatePicker editAppointmentDate;
+
+    @FXML
+    private TextField editAppointmentTime;
+
+    @FXML
     private TabPane tabPane;
 
     @FXML
@@ -370,6 +379,56 @@ public class GuidanceSystemController {
     @FXML
     public void navigateToEditAppointment(AppointmentModel appointment) {
         tabPane.getSelectionModel().select(editAppointmentTab);
+
+        appointmentId = appointment.getId();
+
+        editAppointmentStudentName.setText(appointment.getStudentName());
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        LocalDate parsedDate = LocalDate.parse(appointment.getAppointmentDate(), formatter);
+        editAppointmentDate.setValue(parsedDate);
+
+
+        editAppointmentTime.setText(appointment.getAppointmentTime());
+
+
+    }
+
+    @FXML
+    public void updateAppointment() {
+        String date = editAppointmentDate.getEditor().getText(); // Get the date as a string from the DatePicker editor
+        String time = editAppointmentTime.getText();
+        String studentName = editAppointmentStudentName.getText();
+
+        if (date.isEmpty() || time.isEmpty() || studentName.isEmpty()) {
+            CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
+            return;
+        }
+
+        LocalDate parsedDate;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            parsedDate = LocalDate.parse(date, formatter);
+        } catch (Exception e) {
+            CustomJDialog.getInstance().showDialog("Error", "Invalid date format. Please use MM/dd/yyyy.");
+            return;
+        }
+
+        Map<String, Object> appointmentData = new HashMap<>();
+        appointmentData.put("dateOfAppointment", parsedDate.format(DateTimeFormatter.ofPattern("M/d/yyyy"))); // Convert LocalDate to String
+        appointmentData.put("time", time);
+        appointmentData.put("studentName", studentName);
+        appointmentData.put("appointmentId", appointmentId);
+
+        AppointmentManagerSQL.getInstance().updateAppointment(appointmentData);
+
+        editAppointmentStudentName.setText("");
+        editAppointmentDate.getEditor().clear();
+        editAppointmentTime.setText("");
+
+        loadAppointment();
+
+        tabPane.getSelectionModel().select(appointmentTab);
     }
 
     @FXML
@@ -550,6 +609,7 @@ public class GuidanceSystemController {
         passwordField2.clear();
         roleComboBox.setValue("Select a role");
     }
+
     @FXML
     public void updateAccount(){
         String username = editUsernameField.getText();

@@ -79,4 +79,27 @@ public class AppointmentManagerSQL {
         }
         return null;
     }
+
+    public void updateAppointment(Map<String, Object> appointmentData) {
+        String updateAppointment = "UPDATE appointment_table SET student_name = ?, date_of_appointment = ?, time = ? WHERE appointment_id = ?";
+        try (var conn = MYSQLConnection.getConnection();
+             var pstmt = conn.prepareStatement(updateAppointment)) {
+            pstmt.setString(1, (String) appointmentData.get("studentName"));
+            pstmt.setString(2, (String) appointmentData.get("dateOfAppointment"));
+            pstmt.setString(3, (String) appointmentData.get("time"));
+            pstmt.setInt(4, (Integer) appointmentData.get("appointmentId"));
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Appointment updated successfully.");
+                CustomJDialog.getInstance().showDialog("Appointment Updated", "Appointment updated successfully.");
+            } else {
+                System.out.println("Failed to update appointment.");
+                CustomJDialog.getInstance().showDialog("Appointment Update Failed", "Failed to update appointment.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
