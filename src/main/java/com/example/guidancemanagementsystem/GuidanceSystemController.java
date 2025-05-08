@@ -23,6 +23,7 @@ import model.AppointmentModel;
 import model.StudentModel;
 import model.ViolationModel;
 import utils.AppointmentButton;
+import utils.AppointmentManagerSQL;
 import utils.ManageButton;
 import utils.StudentButton;
 
@@ -99,6 +100,15 @@ public class GuidanceSystemController {
 
     @FXML
     private  TextField editYearAndSection;
+
+    @FXML
+    private ComboBox<String> studentComboBox;
+
+    @FXML
+    private DatePicker dateOfAppointment;
+
+    @FXML
+    private TextField timeOfAppointment;
 
     @FXML
     private TabPane tabPane;
@@ -204,6 +214,7 @@ public class GuidanceSystemController {
 
     ObservableList <StudentModel> studentModelObservableList = FXCollections.observableArrayList();
 
+    ObservableList <String> studentObservableList = FXCollections.observableArrayList();
 
     public void initialize(){
 
@@ -238,6 +249,8 @@ public class GuidanceSystemController {
 
         studentTable.getColumns().addAll(studentIdColumn, studentNameColumn, studentBdateColumn, guardianColumn, studentPnumColumn, yearAndSectionColumn, studentEditColumn, studentDeleteColumn);
         loadStudent();
+
+        studentComboBox.setItems(studentObservableList);
 
     }
 
@@ -285,6 +298,34 @@ public class GuidanceSystemController {
         tabPane.getSelectionModel().select(addAppointmentTab);
     }
 
+    @FXML
+    public void addAppointment(){
+        String date = dateOfAppointment.getEditor().getText(); // Get the date as a string from the DatePicker editor
+        String time = timeOfAppointment.getText();
+        String studentName = studentComboBox.getValue();
+
+        if (date.isEmpty() || time.isEmpty() || studentName == null) {
+            CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
+            return;
+        }
+
+        if (!studentObservableList.contains(studentName)) {
+            CustomJDialog.getInstance().showDialog("Error", "Please select a valid student");
+            return;
+        }
+
+        Map<String, Object> appointmentData = new HashMap<>();
+        appointmentData.put("dateOfAppointment", date);
+        appointmentData.put("time", time);
+        appointmentData.put("studentName", studentName);
+
+        AppointmentManagerSQL.getInstance().InsertAppointment(appointmentData);
+
+        // Clear the fields
+        dateOfAppointment.getEditor().clear(); // Clear the DatePicker editor
+        timeOfAppointment.clear();
+        studentComboBox.setValue("Select a student");
+    }
     @FXML
     public void navigateToEditAppointment(AppointmentModel appointment) {
         tabPane.getSelectionModel().select(editAppointmentTab);
@@ -375,7 +416,7 @@ public class GuidanceSystemController {
         Map<String, Object> studentData = new HashMap<>();
         studentData.put("studentName", student_name);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-        studentData.put("birthdate", parsedDate.format(formatter)); // Convert LocalDate to String
+        studentData.put("birthdate", parsedDate.format(formatter));
         studentData.put("guardian", guardian_name);
         studentData.put("phone", student_phoneNumber);
         studentData.put("yearAndSection", year_and_section);
@@ -394,8 +435,6 @@ public class GuidanceSystemController {
         // Navigate back to the student tab
         tabPane.getSelectionModel().select(studentTab);
     }
-
-
 
     @FXML
     public void onLogout() {
@@ -637,6 +676,9 @@ public class GuidanceSystemController {
 
                     StudentModel studentModel = new StudentModel(id, studentName, birthdate, guardianName, contactNumber, yearAndSection);
                     studentModelObservableList.add(studentModel);
+
+                    // Populate the studentComboBox with student names
+                    studentObservableList.add(studentName);
                 }
                 studentTable.setItems(studentModelObservableList);
 

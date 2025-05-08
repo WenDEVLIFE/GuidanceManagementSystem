@@ -125,9 +125,11 @@
                            <columns>
                               <TableColumn prefWidth="79.0" text="ID" />
                               <TableColumn prefWidth="103.0" text="Student Name" />
-                              <TableColumn prefWidth="180.0" text="Date Submitted" />
-                              <TableColumn prefWidth="152.0" text="Time" />
-                              <TableColumn prefWidth="241.0" text=" Date of Appointment" />
+                              <TableColumn prefWidth="109.33334350585938" text="Date Submitted" />
+                              <TableColumn prefWidth="137.99993896484375" text="Time" />
+                              <TableColumn prefWidth="127.99993896484375" text=" Date of Appointment" />
+                              <TableColumn prefWidth="102.0" text="Edit" />
+                              <TableColumn prefWidth="102.0" text="Delete" />
                            </columns>
                         </TableView>
                      </children>
@@ -146,10 +148,13 @@
                         <Button layoutX="350.0" layoutY="626.0" mnemonicParsing="false" onAction="#navigateToAddViolation" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Violations" />
                         <TableView layoutX="37.0" layoutY="110.0" prefHeight="486.0" prefWidth="756.0">
                            <columns>
-                              <TableColumn prefWidth="79.0" text="ID" />
-                              <TableColumn prefWidth="306.0" text="Student Name" />
-                              <TableColumn prefWidth="170.0" text="Date Submitted" />
-                              <TableColumn prefWidth="200.0" text="Violations" />
+                              <TableColumn prefWidth="59.33332824707031" text="ID" />
+                              <TableColumn prefWidth="139.33331298828125" text="Student Name" />
+                              <TableColumn prefWidth="119.33340454101562" text="Date Submitted" />
+                              <TableColumn prefWidth="109.33331298828125" text="Violations Type" />
+                              <TableColumn prefWidth="166.6666259765625" text="Description" />
+                              <TableColumn prefWidth="81.333251953125" text="Edit" />
+                              <TableColumn prefWidth="81.333251953125" text="Delete" />
                            </columns>
                         </TableView>
                      </children>
@@ -253,7 +258,7 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#updateAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Account" />
+                        <Button layoutX="333.0" layoutY="634.0" mnemonicParsing="false" onAction="#updateStudent" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Account" />
                         <TextField fx:id="editNameField" layoutX="170.0" layoutY="155.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter your name" />
                         <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="289.974609375">
                            <font>
@@ -297,7 +302,7 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Appointment" />
+                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#addAppointment" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Appointment" />
                         <Text layoutX="170.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of Appointment" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
@@ -308,14 +313,14 @@
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="editRoleComboBox11" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
-                        <DatePicker layoutX="168.0" layoutY="243.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <ComboBox fx:id="studentComboBox" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
+                        <DatePicker fx:id="dateOfAppointment" layoutX="168.0" layoutY="243.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
                         <Text layoutX="170.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Time" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="editNameField1" layoutX="169.0" layoutY="341.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a time" />
+                        <TextField fx:id="timeOfAppointment" layoutX="169.0" layoutY="341.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a time" />
                      </children>
                   </AnchorPane>
                </content>
