@@ -173,8 +173,10 @@
                         <TableView layoutX="31.0" layoutY="129.0" prefHeight="486.0" prefWidth="756.0">
                            <columns>
                               <TableColumn prefWidth="111.33335876464844" text="Report ID" />
-                              <TableColumn prefWidth="525.9999389648438" text="Description" />
-                              <TableColumn prefWidth="108.6666259765625" text="Delete" />
+                              <TableColumn prefWidth="108.00003051757812" text="Time" />
+                              <TableColumn prefWidth="146.6666259765625" text="Date" />
+                              <TableColumn prefWidth="242.00006103515625" text="Description" />
+                              <TableColumn prefWidth="141.33331298828125" text="Delete" />
                            </columns>
                         </TableView>
                      </children>
