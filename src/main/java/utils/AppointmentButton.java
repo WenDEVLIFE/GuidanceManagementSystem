@@ -39,7 +39,7 @@ public class AppointmentButton extends TableCell<AppointmentModel, Void> {
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
+                                AppointmentManagerSQL.getInstance().deleteAppointment(selectItem.getId());
                                 appointmentModelObservableList.remove(selectItem);
                                 appointmentTable.refresh();
 

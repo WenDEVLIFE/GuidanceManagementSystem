@@ -102,4 +102,24 @@ public class AppointmentManagerSQL {
             System.out.println(e.getMessage());
         }
     }
+
+    public void deleteAppointment(String id) {
+        String deleteAppointment = "DELETE FROM appointment_table WHERE appointment_id = ?";
+        try (var conn = MYSQLConnection.getConnection();
+             var pstmt = conn.prepareStatement(deleteAppointment)) {
+            pstmt.setString(1, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Appointment deleted successfully.");
+                CustomJDialog.getInstance().showDialog("Appointment Deleted", "Appointment deleted successfully.");
+            } else {
+                System.out.println("Failed to delete appointment.");
+                CustomJDialog.getInstance().showDialog("Appointment Deletion Failed", "Failed to delete appointment.");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
