@@ -58,7 +58,6 @@ public class GuidanceSystemController {
     @FXML
     private PasswordField editPasswordField;
 
-
     @FXML
     private PasswordField passwordField2;
 
@@ -85,6 +84,21 @@ public class GuidanceSystemController {
 
     @FXML
     private TextField yearAndSection;
+
+    @FXML
+    private  TextField editStudentName;
+
+    @FXML
+    private  TextField editGuardianName;
+
+    @FXML
+    private  DatePicker editBirthDate;
+
+    @FXML
+    private  TextField editStudentPhoneNumber;
+
+    @FXML
+    private  TextField editYearAndSection;
 
     @FXML
     private TabPane tabPane;
@@ -294,6 +308,24 @@ public class GuidanceSystemController {
     @FXML
     public void navigateToEditStudent(StudentModel students) {
         tabPane.getSelectionModel().select(editStudentTab);
+
+        studentId = students.getId();
+
+        editStudentName.setText(students.getStudentName());
+
+        editGuardianName.setText(students.getGuardianName());
+
+        editStudentPhoneNumber.setText(students.getPhoneNumber());
+
+        editYearAndSection.setText(students.getYearAndSection());
+
+        // Parse the date in M/d/yyyy format
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+
+        LocalDate parsedDate = LocalDate.parse(students.getBirthdate(), formatter);
+
+        editBirthDate.setValue(parsedDate); // Set the parsed date to the DatePicker
+
     }
 
     @FXML
@@ -315,6 +347,52 @@ public class GuidanceSystemController {
         // Store the user ID for later use
         userId = account.getId();
 
+    }
+
+    @FXML
+    public void updateStudent() {
+        String student_name = editStudentName.getText();
+        String date = editBirthDate.getEditor().getText(); // Get the date as a string from the DatePicker editor
+        String guardian_name = editGuardianName.getText();
+        String student_phoneNumber = editStudentPhoneNumber.getText();
+        String year_and_section = editYearAndSection.getText();
+
+        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty()) {
+            CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
+            return;
+        }
+
+        // Parse the date in M/d/yyyy format
+        LocalDate parsedDate;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            parsedDate = LocalDate.parse(date, formatter);
+        } catch (Exception e) {
+            CustomJDialog.getInstance().showDialog("Error", "Invalid date format. Please use MM/dd/yyyy.");
+            return;
+        }
+
+        Map<String, Object> studentData = new HashMap<>();
+        studentData.put("studentName", student_name);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        studentData.put("birthdate", parsedDate.format(formatter)); // Convert LocalDate to String
+        studentData.put("guardian", guardian_name);
+        studentData.put("phone", student_phoneNumber);
+        studentData.put("yearAndSection", year_and_section);
+        studentData.put("studentId", studentId);
+
+        StudentManagerSQL.getInstance().updateStudent(studentData);
+
+        // Clear the fields
+        editStudentName.setText("");
+        editGuardianName.setText("");
+        editStudentPhoneNumber.setText("");
+        editBirthDate.getEditor().clear(); // Clear the DatePicker editor
+        editYearAndSection.setText("");
+        loadStudent();
+
+        // Navigate back to the student tab
+        tabPane.getSelectionModel().select(studentTab);
     }
 
 
@@ -493,6 +571,7 @@ public class GuidanceSystemController {
         guardianName.setText("");
         studentPhoneNumber.setText("");
         birthDate.getEditor().clear(); // Clear the DatePicker editor
+        yearAndSection.setText("");
         loadStudent();
     }
 

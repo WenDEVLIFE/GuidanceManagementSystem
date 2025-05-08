@@ -75,4 +75,29 @@ public class StudentManagerSQL {
          }
          return null;
      }
+
+    public void updateStudent(Map<String, Object> studentData) {
+        String updateStudent = "UPDATE students SET student_name = ?, birthdate = ?, guardian = ?, contact_number = ?, year_and_section = ? WHERE student_id = ?";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(updateStudent)) {
+            pstmt.setString(1, (String) studentData.get("studentName"));
+            pstmt.setString(2, (String) studentData.get("birthdate"));
+            pstmt.setString(3, (String) studentData.get("guardian"));
+            pstmt.setString(4, (String) studentData.get("phone"));
+            pstmt.setString(5, (String) studentData.get("yearAndSection"));
+            pstmt.setInt(6, Integer.parseInt((String) studentData.get("studentId")));
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Account updated successfully.");
+                CustomJDialog.getInstance().showDialog( "Student Updated", "Student updated successfully.");
+            } else {
+                System.out.println("Failed to update account.");
+                CustomJDialog.getInstance().showDialog( "Student Update Failed", "Failed to update student.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
