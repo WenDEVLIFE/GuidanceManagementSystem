@@ -100,4 +100,24 @@ public class StudentManagerSQL {
             System.out.println(e.getMessage());
         }
     }
+
+    public void deleteStudent(String id) {
+        String deleteStudent = "DELETE FROM students WHERE student_id = ?";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(deleteStudent)) {
+            pstmt.setString(1, id);
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Account deleted successfully.");
+                CustomJDialog.getInstance().showDialog( "Student Deleted", "Student deleted successfully.");
+            } else {
+                System.out.println("Failed to delete account.");
+                CustomJDialog.getInstance().showDialog( "Student Deletion Failed", "Failed to delete student.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

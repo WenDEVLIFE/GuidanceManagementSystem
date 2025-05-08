@@ -2,9 +2,12 @@ package utils;
 
 import com.example.guidancemanagementsystem.CustomJDialog;
 import database.MYSQLConnection;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.SimpleFormatter;
 
@@ -50,5 +53,30 @@ public class AppointmentManagerSQL {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public ObservableList<Map<String, Object>> getAllAppointments() {
+        String selectAllAppointments = "SELECT * FROM appointment_table";
+        try (var conn = MYSQLConnection.getConnection();
+             var pstmt = conn.prepareStatement(selectAllAppointments);
+             var rs = pstmt.executeQuery()) {
+
+            ObservableList<Map<String, Object>> appointmentList = FXCollections.observableArrayList();
+
+            while (rs.next()) {
+                Map<String, Object> appointmentData = new HashMap<>();
+                appointmentData.put("appointment_id", rs.getString("appointment_id"));
+                appointmentData.put("student_name", rs.getString("student_name"));
+                appointmentData.put("date_submitted", rs.getString("date_submitted"));
+                appointmentData.put("date_of_appointment", rs.getString("date_of_appointment"));
+                appointmentData.put("time", rs.getString("time"));
+
+                appointmentList.add(appointmentData);
+            }
+            return appointmentList;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }

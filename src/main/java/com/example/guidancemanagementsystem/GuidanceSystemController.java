@@ -210,11 +210,37 @@ public class GuidanceSystemController {
     @FXML
     private TableColumn <StudentModel, Void> studentDeleteColumn;
 
+    @FXML
+            private TableView<AppointmentModel> appointmentTable;
+
+    @FXML
+            private TableColumn<AppointmentModel, String> appointmentIdColumn;
+
+    @FXML
+            private TableColumn<AppointmentModel, String> appointmentStudentNameColumn;
+
+    @FXML
+            private TableColumn<AppointmentModel, String> appointmentDateColumn;
+
+    @FXML
+    private TableColumn<AppointmentModel, String> dateSubmittedColumn;
+
+    @FXML
+            private TableColumn<AppointmentModel, String> appointmentTimeColumn;
+
+    @FXML
+            private TableColumn<AppointmentModel, Void> appointmentEditColumn;
+
+    @FXML
+            private TableColumn<AppointmentModel, Void> appointmentDeleteColumn;
+
     ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
 
     ObservableList <StudentModel> studentModelObservableList = FXCollections.observableArrayList();
 
     ObservableList <String> studentObservableList = FXCollections.observableArrayList();
+
+    ObservableList <AppointmentModel> appointmentModelObservableList = FXCollections.observableArrayList();
 
     public void initialize(){
 
@@ -252,6 +278,19 @@ public class GuidanceSystemController {
 
         studentComboBox.setItems(studentObservableList);
 
+        appointmentTable.getColumns().clear();
+        appointmentTable.getItems().clear();
+        appointmentIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        appointmentStudentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        dateSubmittedColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateSubmitted()));
+        appointmentDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAppointmentDate()));
+        appointmentTimeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAppointmentTime()));
+        appointmentEditColumn.setCellFactory(AppointmentButton.forTableColumn("Edit", appointmentTable, appointmentModelObservableList, this));
+        appointmentDeleteColumn.setCellFactory(AppointmentButton.forTableColumn("Delete", appointmentTable, appointmentModelObservableList, this));
+
+        appointmentTable.getColumns().addAll(appointmentIdColumn, appointmentStudentNameColumn, dateSubmittedColumn, appointmentDateColumn, appointmentTimeColumn, appointmentEditColumn, appointmentDeleteColumn);
+
+        loadAppointment();
     }
 
     public void setStage(Stage stage) {
@@ -325,6 +364,8 @@ public class GuidanceSystemController {
         dateOfAppointment.getEditor().clear(); // Clear the DatePicker editor
         timeOfAppointment.clear();
         studentComboBox.setValue("Select a student");
+
+        loadAppointment();
     }
     @FXML
     public void navigateToEditAppointment(AppointmentModel appointment) {
@@ -688,5 +729,30 @@ public class GuidanceSystemController {
         }
     }
 
+    public  void loadAppointment() {
+        appointmentTable.getItems().clear();
+        appointmentModelObservableList.clear();
+        appointmentTable.refresh();
 
+        try {
+            ObservableList<Map<String, Object>> appointments = AppointmentManagerSQL.getInstance().getAllAppointments();
+            if (appointments != null && !appointments.isEmpty()) {
+                for (Map<String, Object> appointment : appointments) {
+                    String id = (String) appointment.get("appointment_id");
+                    String studentName = (String) appointment.get("student_name");
+                    String date = (String) appointment.get("date_of_appointment");
+                    String time = (String) appointment.get("time");
+                    String dateSubmitted = (String) appointment.get("date_submitted");
+
+                    AppointmentModel appointmentModel = new AppointmentModel(id, studentName, dateSubmitted, time, date);
+                    appointmentModelObservableList.add(appointmentModel);
+                }
+                appointmentTable.setItems(appointmentModelObservableList);
+            } else {
+                System.out.println("No appointments found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

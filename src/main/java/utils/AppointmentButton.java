@@ -10,7 +10,7 @@ import javafx.util.Callback;
 import model.AccountModel;
 import model.AppointmentModel;
 
-public class AppointmentButton extends TableCell<AccountModel, Void> {
+public class AppointmentButton extends TableCell<AppointmentModel, Void> {
 
     private final Button button;
 
@@ -25,7 +25,7 @@ public class AppointmentButton extends TableCell<AccountModel, Void> {
 
 
         this.button.setOnAction(event -> {
-            AccountModel selectItem = getTableRow().getItem();
+            AppointmentModel selectItem = getTableRow().getItem();
             if (selectItem != null) {
                 if (buttonText.equals("Delete")) {
 
@@ -60,7 +60,7 @@ public class AppointmentButton extends TableCell<AccountModel, Void> {
 
                         // Go to buy product and get the controller
                         Platform.runLater(() -> {
-                            controller.navigateToEditAccount(selectItem);
+                            controller.navigateToEditAppointment(selectItem);
                         });
 
 
@@ -96,7 +96,7 @@ public class AppointmentButton extends TableCell<AccountModel, Void> {
 
 
     // Static method to create a callback for the table column
-    public static Callback<TableColumn<AccountModel, Void>, TableCell<AccountModel, Void>> forTableColumn(String buttonText, TableView<AppointmentModel> appointmentTable, ObservableList<AppointmentModel> accountModelObservableList, GuidanceSystemController controller) {
+    public static Callback<TableColumn<AppointmentModel, Void>, TableCell<AppointmentModel, Void>> forTableColumn(String buttonText, TableView<AppointmentModel> appointmentTable, ObservableList<AppointmentModel> accountModelObservableList, GuidanceSystemController controller) {
         return param -> new AppointmentButton(buttonText, appointmentTable, accountModelObservableList, controller);
     }
 }

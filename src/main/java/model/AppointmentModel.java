@@ -5,18 +5,16 @@ public class AppointmentModel {
 
     String studentName;
 
-    String guardianName;
-
     String appointmentDate;
 
     String appointmentTime;
 
     String dateSubmitted;
 
-    public AppointmentModel(String id, String studentName, String guardianName, String appointmentDate, String appointmentTime, String dateSubmitted) {
+
+    public AppointmentModel(String id, String studentName, String appointmentDate, String appointmentTime, String dateSubmitted) {
         this.id = id;
         this.studentName = studentName;
-        this.guardianName = guardianName;
         this.appointmentDate = appointmentDate;
         this.appointmentTime = appointmentTime;
         this.dateSubmitted = dateSubmitted;
@@ -39,14 +37,6 @@ public class AppointmentModel {
         this.studentName = studentName;
     }
 
-    public String getGuardianName() {
-        return guardianName;
-    }
-
-    public void setGuardianName(String guardianName) {
-        this.guardianName = guardianName;
-    }
-
     public String getAppointmentDate() {
         return appointmentDate;
     }
@@ -67,17 +57,11 @@ public class AppointmentModel {
     public String getDateSubmitted() {
         return dateSubmitted;
     }
-
-    public void setDateSubmitted(String dateSubmitted) {
-        this.dateSubmitted = dateSubmitted;
-    }
-
     @Override
     public String toString() {
         return "AppointmentModel{" +
                 "id='" + id + '\'' +
                 ", studentName='" + studentName + '\'' +
-                ", guardianName='" + guardianName + '\'' +
                 ", appointmentDate='" + appointmentDate + '\'' +
                 ", appointmentTime='" + appointmentTime + '\'' +
                 ", dateSubmitted='" + dateSubmitted + '\'' +

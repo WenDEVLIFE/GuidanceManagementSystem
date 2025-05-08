@@ -121,15 +121,15 @@
                            </font>
                         </Text>
                         <Button layoutX="350.0" layoutY="626.0" mnemonicParsing="false" onAction="#navigateToAddAppointment" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Appointment" />
-                        <TableView layoutX="37.0" layoutY="110.0" prefHeight="486.0" prefWidth="756.0">
+                        <TableView fx:id="appointmentTable" layoutX="37.0" layoutY="110.0" prefHeight="486.0" prefWidth="756.0">
                            <columns>
-                              <TableColumn prefWidth="79.0" text="ID" />
-                              <TableColumn prefWidth="103.0" text="Student Name" />
-                              <TableColumn prefWidth="109.33334350585938" text="Date Submitted" />
-                              <TableColumn prefWidth="137.99993896484375" text="Time" />
-                              <TableColumn prefWidth="127.99993896484375" text=" Date of Appointment" />
-                              <TableColumn prefWidth="102.0" text="Edit" />
-                              <TableColumn prefWidth="102.0" text="Delete" />
+                              <TableColumn fx:id="appointmentIdColumn" prefWidth="79.0" text="ID" />
+                              <TableColumn fx:id="appointmentStudentNameColumn" prefWidth="103.0" text="Student Name" />
+                              <TableColumn fx:id="dateSubmittedColumn" prefWidth="109.33334350585938" text="Date Submitted" />
+                              <TableColumn fx:id="appointmentTimeColumn" prefWidth="137.99993896484375" text="Time" />
+                              <TableColumn fx:id="appointmentDateColumn" prefWidth="127.99993896484375" text=" Date of Appointment" />
+                              <TableColumn fx:id="appointmentEditColumn" prefWidth="102.0" text="Edit" />
+                              <TableColumn fx:id="appointmentDeleteColumn" prefWidth="102.0" text="Delete" />
                            </columns>
                         </TableView>
                      </children>

@@ -3,6 +3,7 @@ package utils;
 
 import com.example.guidancemanagementsystem.GuidanceSystemController;
 import database.AccountManagerSQL;
+import database.StudentManagerSQL;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -31,15 +32,15 @@ public class StudentButton extends TableCell<StudentModel, Void> {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
-                    alert.setHeaderText("Delete Report");
-                    alert.setContentText("Are you sure you want to delete this report?");
+                    alert.setHeaderText("Delete Student");
+                    alert.setContentText("Are you sure you want to delete this student?");
                     alert.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {
 
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
+                                StudentManagerSQL.getInstance().deleteStudent(selectItem.getId());
                                 studentModelObservableList.remove(selectItem);
                                 studentTable.refresh();
 
