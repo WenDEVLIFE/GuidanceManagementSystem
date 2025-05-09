@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -33,6 +34,21 @@ public class GuidanceSystemController {
     private String  violationId;
 
     private  String appointmentId;
+
+    @FXML
+    private Text appointmentCountText;
+
+    @FXML
+    private Text studentCountText;
+
+    @FXML
+    private Text violationCountText;
+
+    @FXML
+    private Text reportCountText;
+
+    @FXML
+    private Text accountCountText;
 
     @FXML
     private TextField nameField;
@@ -330,6 +346,8 @@ public class GuidanceSystemController {
 
     public void initialize(){
 
+        loadCounts();
+
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Student");
         ObservableList <String> violationList = FXCollections.observableArrayList(
                 "Disobedience/Insubordination 1", "Cheating", "Profanity", "Unauthorized Collaboration", "Disruptin of Class",
@@ -498,6 +516,7 @@ public class GuidanceSystemController {
 
         loadAppointment();
         loadReport();
+        loadCounts();
     }
     @FXML
     public void navigateToEditAppointment(AppointmentModel appointment) {
@@ -816,6 +835,8 @@ public class GuidanceSystemController {
         passwordField2.clear();
         roleComboBox.setValue("Select a role");
         loadReport();
+        loadCounts();
+        loadAccoountData();
     }
 
     @FXML
@@ -920,6 +941,7 @@ public class GuidanceSystemController {
         yearAndSection.setText("");
         loadStudent();
         loadReport();
+        loadCounts();
     }
 
     public void setRole(String role) {
@@ -1083,5 +1105,24 @@ public class GuidanceSystemController {
             e.printStackTrace();
         }
 
+    }
+
+    public void loadCounts(){
+        try {
+            int studentCount = StudentManagerSQL.getInstance().getStudentCount();
+            int appointmentCount = AppointmentManagerSQL.getInstance().getAppointmentCount();
+            int violationCount = ViolationManagerSQL.getInstance().getViolationCount();
+            int reportCount = ReportManagerSQL.getInstance().getReportCount();
+            int accountCount = AccountManagerSQL.getInstance().getAccountCount();
+
+            studentCountText.setText(String.valueOf(studentCount));
+            appointmentCountText.setText(String.valueOf(appointmentCount));
+            violationCountText.setText(String.valueOf(violationCount));
+            reportCountText.setText(String.valueOf(reportCount));
+            accountCountText.setText(String.valueOf(accountCount));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -42,6 +42,7 @@ public class ReportButton extends TableCell<ReportModel, Void> {
                                 ReportManagerSQL.getInstance().deleteReports(selectItem.getId());
                                 reportModelObservableList.remove(selectItem);
                                 reportTable.refresh();
+                                controller.loadCounts();
 
 
                             });

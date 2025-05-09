@@ -147,4 +147,18 @@ public class AccountManagerSQL {
             System.out.println(e.getMessage());
         }
     }
+
+    public int getAccountCount() {
+        String sql = "SELECT COUNT(*) AS count FROM users";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }

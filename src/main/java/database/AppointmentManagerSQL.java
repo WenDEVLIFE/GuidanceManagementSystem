@@ -148,4 +148,18 @@ public class AppointmentManagerSQL {
             System.out.println(e.getMessage());
         }
     }
+
+    public int getAppointmentCount() {
+        String sql = "SELECT COUNT(*) AS count FROM appointment_table";
+        try (var conn = MYSQLConnection.getConnection();
+             var pstmt = conn.prepareStatement(sql);
+             var rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("count");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }

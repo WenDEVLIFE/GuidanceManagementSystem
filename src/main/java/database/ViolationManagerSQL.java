@@ -143,4 +143,18 @@ public class ViolationManagerSQL {
             System.out.println(e.getMessage());
         }
     }
+
+    public int getViolationCount() {
+        String sql = "SELECT COUNT(*) AS count FROM violation_table";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            var resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt("count");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }

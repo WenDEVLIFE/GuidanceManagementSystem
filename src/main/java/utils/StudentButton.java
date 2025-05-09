@@ -43,7 +43,7 @@ public class StudentButton extends TableCell<StudentModel, Void> {
                                 StudentManagerSQL.getInstance().deleteStudent(selectItem.getId());
                                 studentModelObservableList.remove(selectItem);
                                 studentTable.refresh();
-
+                                controller.loadCounts();
 
                             });
 

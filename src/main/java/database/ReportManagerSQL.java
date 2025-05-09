@@ -61,4 +61,18 @@ public class ReportManagerSQL {
 
         }
     }
+
+    public int getReportCount() {
+        String sql = "SELECT COUNT(*) AS report_count FROM reports";
+        try (var conn = MYSQLConnection.getConnection();
+             var pstmt = conn.prepareStatement(sql);
+             var rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("report_count");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
 }

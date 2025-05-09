@@ -42,7 +42,7 @@ public class ViolationButton extends TableCell<ViolationModel, Void> {
                                 ViolationManagerSQL.getInstance().deleteViolation(selectItem.getId());
                                 violationObservableList.remove(selectItem);
                                 violationTable.refresh();
-
+                                controller.loadCounts();
 
                             });
 

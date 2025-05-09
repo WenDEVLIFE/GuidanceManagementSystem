@@ -157,4 +157,18 @@ public class StudentManagerSQL {
             System.out.println(e.getMessage());
         }
     }
+
+    public int getStudentCount() {
+        String sql = "SELECT COUNT(*) AS student_count FROM students";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            if (rs.next()) {
+                return rs.getInt("student_count");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
+    }
 }

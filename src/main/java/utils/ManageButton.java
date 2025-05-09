@@ -40,7 +40,7 @@ public class ManageButton extends TableCell<AccountModel, Void> {
                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
                                 accountModelObservableList.remove(selectItem);
                                 accountTable.refresh();
-
+                                controller.loadCounts();
 
                             });
 

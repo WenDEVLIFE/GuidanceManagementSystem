@@ -41,7 +41,7 @@ public class AppointmentButton extends TableCell<AppointmentModel, Void> {
                                 AppointmentManagerSQL.getInstance().deleteAppointment(selectItem.getId());
                                 appointmentModelObservableList.remove(selectItem);
                                 appointmentTable.refresh();
-
+                                controller.loadCounts();
 
                             });
 
