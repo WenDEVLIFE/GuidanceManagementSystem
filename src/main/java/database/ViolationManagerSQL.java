@@ -1,12 +1,15 @@
 package database;
 
 import com.example.guidancemanagementsystem.CustomJDialog;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ViolationManagerSQL {
@@ -70,5 +73,31 @@ public class ViolationManagerSQL {
             System.out.println(e.getMessage());
         }
 
+    }
+
+    public ObservableList<Map<String, Object>> getAllViolations() {
+         String sql = "SELECT * FROM violation_table";
+        ObservableList<Map<String, Object>> violations = FXCollections.observableArrayList();
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            var resultSet = pstmt.executeQuery();
+
+            while (resultSet.next()) {
+                Map<String, Object> violationData = new HashMap<>();
+                violationData.put("violation_id", resultSet.getInt("violation_id"));
+                violationData.put("student_name", resultSet.getString("student_name"));
+                violationData.put("date_submitted", resultSet.getString("date_submitted"));
+                violationData.put("description", resultSet.getString("description"));
+                violationData.put("violation_type", resultSet.getString("violation_type"));
+                violationData.put("date_of_violation", resultSet.getString("date_of_violation"));
+
+                violations.add(violationData);
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return violations;
     }
 }

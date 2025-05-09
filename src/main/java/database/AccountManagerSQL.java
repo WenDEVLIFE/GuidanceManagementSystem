@@ -49,6 +49,22 @@ public class AccountManagerSQL {
                     reportPstmt.setString(2, String.valueOf(java.time.LocalDate.now()));
                     reportPstmt.setString(3, String.valueOf(java.time.LocalTime.now()));
                     reportPstmt.executeUpdate();
+
+                    try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+                        if (generatedKeys.next()) {
+                            int generatedId = generatedKeys.getInt(1);
+                            System.out.println("Account created successfully with ID: " + generatedId);
+                            CustomJDialog.getInstance().showDialog("Account Created", "Account created successfully with ID: " + generatedId);
+
+                            try (PreparedStatement pstmtReports = conn.prepareStatement(insertReports)) {
+                                pstmtReports.setString(1, "Account with ID " + generatedId + " was created.");
+                                pstmtReports.setString(2, String.valueOf(java.time.LocalDate.now()));
+                                pstmtReports.setString(3, String.valueOf(java.time.LocalTime.now()));
+                                pstmtReports.executeUpdate();
+                            }
+
+                        }
+                    }
                 }
             } else {
                 System.out.println("Failed to create account.");

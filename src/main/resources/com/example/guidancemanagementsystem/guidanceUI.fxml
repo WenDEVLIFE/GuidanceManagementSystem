@@ -147,15 +147,15 @@
                            </font>
                         </Text>
                         <Button layoutX="350.0" layoutY="626.0" mnemonicParsing="false" onAction="#navigateToAddViolation" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Violations" />
-                        <TableView layoutX="37.0" layoutY="110.0" prefHeight="486.0" prefWidth="756.0">
+                        <TableView fx:id="violationTable" layoutX="37.0" layoutY="110.0" prefHeight="486.0" prefWidth="756.0">
                            <columns>
-                              <TableColumn prefWidth="59.33332824707031" text="ID" />
-                              <TableColumn prefWidth="139.33331298828125" text="Student Name" />
-                              <TableColumn prefWidth="119.33340454101562" text="Date Submitted" />
-                              <TableColumn prefWidth="109.33331298828125" text="Violations Type" />
-                              <TableColumn prefWidth="166.6666259765625" text="Description" />
-                              <TableColumn prefWidth="81.333251953125" text="Edit" />
-                              <TableColumn prefWidth="81.333251953125" text="Delete" />
+                              <TableColumn fx:id="violationIdColumn" prefWidth="59.33332824707031" text="ID" />
+                              <TableColumn fx:id="violationStudentNameColumn" prefWidth="139.33331298828125" text="Student Name" />
+                              <TableColumn fx:id="violationDateColumn" prefWidth="119.33340454101562" text="Date Submitted" />
+                              <TableColumn fx:id="violationTypeColumn" prefWidth="109.33331298828125" text="Violations Type" />
+                              <TableColumn fx:id="violationDescriptionColumn" prefWidth="166.6666259765625" text="Description" />
+                              <TableColumn fx:id="violationEditColumn" prefWidth="81.333251953125" text="Edit" />
+                              <TableColumn fx:id="violationDeleteColumn" prefWidth="81.333251953125" text="Delete" />
                            </columns>
                         </TableView>
                      </children>

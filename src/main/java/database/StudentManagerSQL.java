@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +52,25 @@ public class StudentManagerSQL {
                         reportPstmt.setString(2, String.valueOf(java.time.LocalDate.now()));
                         reportPstmt.setString(3, String.valueOf(java.time.LocalTime.now()));
                         reportPstmt.executeUpdate();
+
+                        try (var generatedKeys = pstmt.getGeneratedKeys()) {
+                            if (generatedKeys.next()) {
+                                int generatedId = generatedKeys.getInt(1);
+
+                                System.out.println("Student created successfully with ID: " + generatedId);
+                                CustomJDialog.getInstance().showDialog("Student Created", "Student created successfully with ID: " + generatedId);
+
+                                try (PreparedStatement pstmtReports = conn.prepareStatement(insertReports)) {
+                                    pstmtReports.setString(1, "Student with ID " + generatedId + " was created.");
+                                    LocalDate datestrReport = LocalDate.now();
+                                    DateTimeFormatter formatterReport = DateTimeFormatter.ofPattern("M/d/yyyy");
+                                    String formattedDateReport = datestrReport.format(formatterReport);
+                                    pstmtReports.setString(2, formattedDateReport);
+                                    pstmtReports.setString(3, java.time.LocalTime.now().toString());
+                                    pstmtReports.executeUpdate();
+                                }
+                                }
+                        }
                     }
              } else {
                  System.out.println("Failed to create account.");

@@ -27,6 +27,7 @@ import utils.AppointmentButton;
 import database.AppointmentManagerSQL;
 import utils.ManageButton;
 import utils.StudentButton;
+import utils.ViolationButton;
 
 public class GuidanceSystemController {
 
@@ -256,13 +257,39 @@ public class GuidanceSystemController {
     @FXML
             private TableColumn<AppointmentModel, Void> appointmentDeleteColumn;
 
-    ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
+    @FXML
+            private TableView<ViolationModel> violationTable;
+
+    @FXML
+            private TableColumn<ViolationModel, String> violationIdColumn;
+
+    @FXML
+            private TableColumn<ViolationModel, String> violationStudentNameColumn;
+
+    @FXML
+            private TableColumn<ViolationModel, String> violationDateColumn;
+
+    @FXML
+            private TableColumn<ViolationModel, String> violationTypeColumn;
+
+    @FXML
+            private TableColumn<ViolationModel, String> violationDescriptionColumn;
+
+    @FXML
+            private TableColumn<ViolationModel, Void> violationEditColumn;
+
+    @FXML
+            private TableColumn<ViolationModel, Void> violationDeleteColumn;
+
+   ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
 
     ObservableList <StudentModel> studentModelObservableList = FXCollections.observableArrayList();
 
     ObservableList <String> studentObservableList = FXCollections.observableArrayList();
 
     ObservableList <AppointmentModel> appointmentModelObservableList = FXCollections.observableArrayList();
+
+    ObservableList<ViolationModel> violationModelObservableList = FXCollections.observableArrayList();
 
     public void initialize(){
 
@@ -324,6 +351,20 @@ public class GuidanceSystemController {
         loadAppointment();
 
         violationComboBox.setItems(violationList);
+
+        violationTable.getColumns().clear();
+        violationTable.getItems().clear();
+        violationIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        violationStudentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        violationDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDateSubmitted()));
+        violationTypeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getViolationType()));
+        violationDescriptionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+        violationEditColumn.setCellFactory(ViolationButton.forTableColumn("Edit", violationTable, violationModelObservableList, this));
+        violationDeleteColumn.setCellFactory(ViolationButton.forTableColumn("Delete", violationTable, violationModelObservableList, this));
+
+        violationTable.getColumns().addAll(violationIdColumn, violationStudentNameColumn, violationDateColumn, violationTypeColumn, violationDescriptionColumn, violationEditColumn, violationDeleteColumn);
+
+        loadViolation();
     }
 
     public void setStage(Stage stage) {
@@ -493,8 +534,10 @@ public class GuidanceSystemController {
         selectDateViolation.getEditor().clear(); // Clear the DatePicker editor
         violationDescription.clear();
         selectedStudentComboBox.setValue("Select a student");
+        violationComboBox.setValue("Select a violation");
 
         loadStudent();
+        loadViolation();
     }
 
     @FXML
@@ -873,6 +916,34 @@ public class GuidanceSystemController {
                 appointmentTable.setItems(appointmentModelObservableList);
             } else {
                 System.out.println("No appointments found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadViolation() {
+        violationTable.getItems().clear();
+        violationModelObservableList.clear();
+        violationTable.refresh();
+
+        try {
+            ObservableList<Map<String, Object>> violations = ViolationManagerSQL.getInstance().getAllViolations();
+            if (violations != null && !violations.isEmpty()) {
+                for (Map<String, Object> violation : violations) {
+
+                    String id = String.valueOf(violation.get("violation_id"));
+                    String studentName = (String) violation.get("student_name");
+                    String date = (String) violation.get("date_of_violation");
+                    String type = (String) violation.get("violation_type");
+                    String description = (String) violation.get("description");
+
+                    ViolationModel violationModel = new ViolationModel(id, studentName, date, type, description);
+                    violationModelObservableList.add(violationModel);
+                }
+                violationTable.setItems(violationModelObservableList);
+            } else {
+                System.out.println("No violations found.");
             }
         } catch (Exception e) {
             e.printStackTrace();
