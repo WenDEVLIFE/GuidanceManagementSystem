@@ -31,7 +31,7 @@ public class ViolationButton extends TableCell<ViolationModel, Void> {
 
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
-                    alert.setHeaderText("Delete Report");
+                    alert.setHeaderText("Delete Violation");
                     alert.setContentText("Are you sure you want to delete this violation?");
                     alert.showAndWait().ifPresent(response -> {
                         if (response == ButtonType.OK) {

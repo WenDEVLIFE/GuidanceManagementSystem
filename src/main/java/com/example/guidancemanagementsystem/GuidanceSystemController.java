@@ -250,19 +250,32 @@ public class GuidanceSystemController {
             private TableView<AppointmentModel> appointmentTable;
 
     @FXML
+    private TableView<AppointmentModel> appointmentTable1;
+
+
+    @FXML
             private TableColumn<AppointmentModel, String> appointmentIdColumn;
 
     @FXML
             private TableColumn<AppointmentModel, String> appointmentStudentNameColumn;
 
     @FXML
+    private TableColumn<AppointmentModel, String> appointmentStudentNameColumn1;
+
+    @FXML
             private TableColumn<AppointmentModel, String> appointmentDateColumn;
+
+    @FXML
+    private TableColumn<AppointmentModel, String> appointmentDateColumn1;
 
     @FXML
     private TableColumn<AppointmentModel, String> dateSubmittedColumn;
 
     @FXML
             private TableColumn<AppointmentModel, String> appointmentTimeColumn;
+
+    @FXML
+    private TableColumn<AppointmentModel, String> appointmentTimeColumn1;
 
     @FXML
             private TableColumn<AppointmentModel, Void> appointmentEditColumn;
@@ -360,6 +373,14 @@ public class GuidanceSystemController {
         appointmentDeleteColumn.setCellFactory(AppointmentButton.forTableColumn("Delete", appointmentTable, appointmentModelObservableList, this));
 
         appointmentTable.getColumns().addAll(appointmentIdColumn, appointmentStudentNameColumn, dateSubmittedColumn, appointmentDateColumn, appointmentTimeColumn, appointmentEditColumn, appointmentDeleteColumn);
+        appointmentTable1.getColumns().clear();
+        appointmentTable1.getItems().clear();
+
+        appointmentStudentNameColumn1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
+        appointmentDateColumn1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAppointmentDate()));
+        appointmentTimeColumn1.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAppointmentTime()));
+
+        appointmentTable1.getColumns().addAll(appointmentStudentNameColumn1, appointmentDateColumn1, appointmentTimeColumn1);
 
         loadAppointment();
 
@@ -952,8 +973,11 @@ public class GuidanceSystemController {
 
     public  void loadAppointment() {
         appointmentTable.getItems().clear();
+        appointmentTable1.getItems().clear();
         appointmentModelObservableList.clear();
         appointmentTable.refresh();
+        appointmentTable1.refresh();
+
 
         try {
             ObservableList<Map<String, Object>> appointments = AppointmentManagerSQL.getInstance().getAllAppointments();
@@ -969,6 +993,7 @@ public class GuidanceSystemController {
                     appointmentModelObservableList.add(appointmentModel);
                 }
                 appointmentTable.setItems(appointmentModelObservableList);
+                appointmentTable1.setItems(appointmentModelObservableList);
             } else {
                 System.out.println("No appointments found.");
             }
