@@ -2,6 +2,7 @@ package utils;
 
 import com.example.guidancemanagementsystem.GuidanceSystemController;
 import database.AccountManagerSQL;
+import database.ViolationManagerSQL;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -38,7 +39,7 @@ public class ViolationButton extends TableCell<ViolationModel, Void> {
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
+                                ViolationManagerSQL.getInstance().deleteViolation(selectItem.getId());
                                 violationObservableList.remove(selectItem);
                                 violationTable.refresh();
 
@@ -57,6 +58,7 @@ public class ViolationButton extends TableCell<ViolationModel, Void> {
 
                         // Go to buy product and get the controller
                         Platform.runLater(() -> {
+                            controller.navigateToEditViolation(selectItem);
                         });
 
 

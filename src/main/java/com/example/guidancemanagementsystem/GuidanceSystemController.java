@@ -134,6 +134,19 @@ public class GuidanceSystemController {
     private TextArea violationDescription;
 
     @FXML
+    private TextField getEditStudentName;
+
+    @FXML
+    private DatePicker EditViolationDate;
+
+    @FXML
+    private TextArea EditViolationDescription;
+
+    @FXML
+    private ComboBox <String> editViolationComboBox;
+
+
+    @FXML
     private TabPane tabPane;
 
     @FXML
@@ -530,8 +543,7 @@ public class GuidanceSystemController {
 
         ViolationManagerSQL.getInstance().InsertViolation(violationData);
 
-        // Clear the fields
-        selectDateViolation.getEditor().clear(); // Clear the DatePicker editor
+        selectDateViolation.getEditor().clear();
         violationDescription.clear();
         selectedStudentComboBox.setValue("Select a student");
         violationComboBox.setValue("Select a violation");
@@ -541,8 +553,56 @@ public class GuidanceSystemController {
     }
 
     @FXML
+    private void updateViolation() {
+        String date = EditViolationDate.getEditor().getText();
+        String violation = editViolationComboBox.getValue();
+        String description = EditViolationDescription.getText();
+        String studentName = getEditStudentName.getText();
+
+        if (date.isEmpty() || violation == null || description.isEmpty() || studentName == null) {
+            CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
+            return;
+        }
+
+        LocalDate parsedDate;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            parsedDate = LocalDate.parse(date, formatter);
+        } catch (Exception e) {
+            CustomJDialog.getInstance().showDialog("Error", "Invalid date format. Please use MM/dd/yyyy.");
+            return;
+        }
+
+        Map<String, Object> violationData = new HashMap<>();
+        violationData.put("date_of_violation", parsedDate.format(DateTimeFormatter.ofPattern("M/d/yyyy")));
+        violationData.put("violation_type", violation);
+        violationData.put("description", description);
+        violationData.put("student_name", studentName);
+        violationData.put("violationId", violationId);
+
+        ViolationManagerSQL.getInstance().updateViolation(violationData);
+
+        EditViolationDescription.clear();
+        getEditStudentName.clear();
+        editViolationComboBox.setValue("Select a violation");
+
+        loadViolation();
+
+        tabPane.getSelectionModel().select(violationTab);
+    }
+
+    @FXML
     public void navigateToEditViolation(ViolationModel violation) {
         tabPane.getSelectionModel().select(editViolationTab);
+
+        violationId = violation.getId();
+        getEditStudentName.setText(violation.getStudentName());
+        EditViolationDescription.setText(violation.getDescription());
+        violationComboBox.setValue(violation.getViolationType());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        LocalDate parsedDate = LocalDate.parse(violation.getDateSubmitted(), formatter);
+        EditViolationDate.setValue(parsedDate);
+        editViolationComboBox.setValue(violation.getViolationType());
     }
 
     @FXML
@@ -607,7 +667,6 @@ public class GuidanceSystemController {
             return;
         }
 
-        // Parse the date in M/d/yyyy format
         LocalDate parsedDate;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
@@ -628,15 +687,13 @@ public class GuidanceSystemController {
 
         StudentManagerSQL.getInstance().updateStudent(studentData);
 
-        // Clear the fields
         editStudentName.setText("");
         editGuardianName.setText("");
         editStudentPhoneNumber.setText("");
-        editBirthDate.getEditor().clear(); // Clear the DatePicker editor
+        editBirthDate.getEditor().clear();
         editYearAndSection.setText("");
         loadStudent();
 
-        // Navigate back to the student tab
         tabPane.getSelectionModel().select(studentTab);
     }
 
@@ -644,7 +701,7 @@ public class GuidanceSystemController {
     public void onLogout() {
         int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
-            // Handle logout logic here
+
             System.out.println("User logged out.");
             stage.close();
         }
@@ -780,7 +837,7 @@ public class GuidanceSystemController {
     @FXML
     public void AddStudent() {
         String student_name = studentName.getText();
-        String date = birthDate.getEditor().getText(); // Get the date as a string from the DatePicker editor
+        String date = birthDate.getEditor().getText();
         String guardian_name = guardianName.getText();
         String student_phoneNumber = studentPhoneNumber.getText();
         String year_and_section = yearAndSection.getText();
@@ -790,7 +847,6 @@ public class GuidanceSystemController {
             return;
         }
 
-        // Parse the date in M/d/yyyy format
         LocalDate parsedDate;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
@@ -803,18 +859,17 @@ public class GuidanceSystemController {
         Map<String, Object> studentData = new HashMap<>();
         studentData.put("studentName", student_name);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-        studentData.put("birthdate", parsedDate.format(formatter)); // Convert LocalDate to String
+        studentData.put("birthdate", parsedDate.format(formatter));
         studentData.put("guardian", guardian_name);
         studentData.put("phone", student_phoneNumber);
         studentData.put("yearAndSection", year_and_section);
 
         StudentManagerSQL.getInstance().InsertStudent(studentData);
 
-        // Clear the fields
         studentName.setText("");
         guardianName.setText("");
         studentPhoneNumber.setText("");
-        birthDate.getEditor().clear(); // Clear the DatePicker editor
+        birthDate.getEditor().clear();
         yearAndSection.setText("");
         loadStudent();
     }

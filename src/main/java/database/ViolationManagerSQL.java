@@ -100,4 +100,47 @@ public class ViolationManagerSQL {
         }
         return violations;
     }
+
+    public void deleteViolation(String id) {
+        String sql = "DELETE FROM violation_table WHERE violation_id = ?";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, id);
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Violation deleted successfully.");
+                CustomJDialog.getInstance().showDialog("Violation Deleted", "Violation deleted successfully.");
+            } else {
+                System.out.println("Failed to delete violation.");
+                CustomJDialog.getInstance().showDialog("Violation Deletion Failed", "Failed to delete violation.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void updateViolation(Map<String, Object> violationData) {
+        String sql = "UPDATE violation_table SET student_name = ?, description = ?, violation_type = ?, date_of_violation = ? WHERE violation_id = ?";
+        try (Connection conn = MYSQLConnection.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, (String) violationData.get("student_name"));
+            pstmt.setString(2, (String) violationData.get("description"));
+            pstmt.setString(3, (String) violationData.get("violation_type"));
+            pstmt.setString(4, (String) violationData.get("date_of_violation"));
+            pstmt.setInt(5, Integer.parseInt((String) violationData.get("violationId")));
+
+            int rowsAffected = pstmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Violation updated successfully.");
+                CustomJDialog.getInstance().showDialog("Violation Updated", "Violation updated successfully.");
+            } else {
+                System.out.println("Failed to update violation.");
+                CustomJDialog.getInstance().showDialog("Violation Update Failed", "Failed to update violation.");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
