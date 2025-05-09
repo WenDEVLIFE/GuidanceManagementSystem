@@ -1,8 +1,6 @@
 package com.example.guidancemanagementsystem;
 
-import database.AccountManagerSQL;
-import database.StudentManagerSQL;
-import database.ViolationManagerSQL;
+import database.*;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,15 +17,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.Tab;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
-import model.AccountModel;
-import model.AppointmentModel;
-import model.StudentModel;
-import model.ViolationModel;
-import utils.AppointmentButton;
-import database.AppointmentManagerSQL;
-import utils.ManageButton;
-import utils.StudentButton;
-import utils.ViolationButton;
+import model.*;
+import utils.*;
 
 public class GuidanceSystemController {
 
@@ -307,6 +298,24 @@ public class GuidanceSystemController {
     @FXML
             private TableColumn<ViolationModel, Void> violationDeleteColumn;
 
+    @FXML
+            private TableView<ReportModel> reportTable;
+
+    @FXML
+            private TableColumn<ReportModel, String> reportIdColumn;
+
+    @FXML
+            private TableColumn<ReportModel, String> reportTimeColumn;
+
+    @FXML
+            private TableColumn<ReportModel, String> reportDateColumn;
+
+    @FXML
+            private TableColumn<ReportModel, String> reportDescriptionColumn;
+
+    @FXML
+            private TableColumn<ReportModel, Void> reportDeleteColumn;
+
    ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
 
     ObservableList <StudentModel> studentModelObservableList = FXCollections.observableArrayList();
@@ -316,6 +325,8 @@ public class GuidanceSystemController {
     ObservableList <AppointmentModel> appointmentModelObservableList = FXCollections.observableArrayList();
 
     ObservableList<ViolationModel> violationModelObservableList = FXCollections.observableArrayList();
+
+    ObservableList <ReportModel> reportModelObservableList = FXCollections.observableArrayList();
 
     public void initialize(){
 
@@ -399,6 +410,18 @@ public class GuidanceSystemController {
         violationTable.getColumns().addAll(violationIdColumn, violationStudentNameColumn, violationDateColumn, violationTypeColumn, violationDescriptionColumn, violationEditColumn, violationDeleteColumn);
 
         loadViolation();
+
+        reportTable .getColumns().clear();
+        reportTable.getItems().clear();
+        reportIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        reportTimeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTime()));
+        reportDateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
+        reportDescriptionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+        reportDeleteColumn.setCellFactory(ReportButton.forTableColumn("Delete", reportTable, reportModelObservableList, this));
+
+        reportTable.getColumns().addAll(reportIdColumn, reportTimeColumn, reportDateColumn, reportDescriptionColumn, reportDeleteColumn);
+
+        loadReport();
     }
 
     public void setStage(Stage stage) {
@@ -474,6 +497,7 @@ public class GuidanceSystemController {
         studentComboBox.setValue("Select a student");
 
         loadAppointment();
+        loadReport();
     }
     @FXML
     public void navigateToEditAppointment(AppointmentModel appointment) {
@@ -571,6 +595,7 @@ public class GuidanceSystemController {
 
         loadStudent();
         loadViolation();
+        loadReport();
     }
 
     @FXML
@@ -790,6 +815,7 @@ public class GuidanceSystemController {
         passwordField1.clear();
         passwordField2.clear();
         roleComboBox.setValue("Select a role");
+        loadReport();
     }
 
     @FXML
@@ -893,6 +919,7 @@ public class GuidanceSystemController {
         birthDate.getEditor().clear();
         yearAndSection.setText("");
         loadStudent();
+        loadReport();
     }
 
     public void setRole(String role) {
@@ -1028,5 +1055,33 @@ public class GuidanceSystemController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void loadReport() {
+        reportTable.getItems().clear();
+        reportModelObservableList.clear();
+        reportTable.refresh();
+
+        try {
+            ObservableList<Map<String, Object>> reports = ReportManagerSQL.getInstance().getAllReports();
+            if (reports != null && !reports.isEmpty()) {
+                for (Map<String, Object> report : reports) {
+
+                    String id = String.valueOf(report.get("report_id"));
+                    String date = (String) report.get("date");
+                    String time = (String) report.get("time");
+                    String description = (String) report.get("description");
+
+                    ReportModel reportModel = new ReportModel(id, date, time, description);
+                    reportModelObservableList.add(reportModel);
+                }
+                reportTable.setItems(reportModelObservableList);
+            } else {
+                System.out.println("No reports found.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

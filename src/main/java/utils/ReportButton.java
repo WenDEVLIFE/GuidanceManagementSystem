@@ -2,6 +2,7 @@ package utils;
 
 import com.example.guidancemanagementsystem.GuidanceSystemController;
 import database.AccountManagerSQL;
+import database.ReportManagerSQL;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -38,7 +39,7 @@ public class ReportButton extends TableCell<ReportModel, Void> {
                             // Delete car from database
 
                             Platform.runLater(() -> {
-                                AccountManagerSQL.getInstance().deleteUser(selectItem.getId());
+                                ReportManagerSQL.getInstance().deleteReports(selectItem.getId());
                                 reportModelObservableList.remove(selectItem);
                                 reportTable.refresh();
 

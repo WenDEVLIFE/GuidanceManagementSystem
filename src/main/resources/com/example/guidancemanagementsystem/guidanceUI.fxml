@@ -171,13 +171,13 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <TableView layoutX="31.0" layoutY="129.0" prefHeight="486.0" prefWidth="756.0">
+                        <TableView fx:id="reportTable" layoutX="31.0" layoutY="129.0" prefHeight="486.0" prefWidth="756.0">
                            <columns>
-                              <TableColumn prefWidth="111.33335876464844" text="Report ID" />
-                              <TableColumn prefWidth="108.00003051757812" text="Time" />
-                              <TableColumn prefWidth="146.6666259765625" text="Date" />
-                              <TableColumn prefWidth="242.00006103515625" text="Description" />
-                              <TableColumn prefWidth="141.33331298828125" text="Delete" />
+                              <TableColumn fx:id="reportIdColumn" prefWidth="111.33335876464844" text="Report ID" />
+                              <TableColumn fx:id="reportTimeColumn" prefWidth="108.00003051757812" text="Time" />
+                              <TableColumn fx:id="reportDateColumn" prefWidth="146.6666259765625" text="Date" />
+                              <TableColumn fx:id="reportDescriptionColumn" prefWidth="242.00006103515625" text="Description" />
+                              <TableColumn fx:id="reportDeleteColumn" prefWidth="141.33331298828125" text="Delete" />
                            </columns>
                         </TableView>
                      </children>
