@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -452,24 +453,36 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
-                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Violations" wrappingWidth="289.974609375">
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create an Violation" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Update Violation" />
+                        <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#addViolation" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Violation" />
                         <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <ComboBox fx:id="editRoleComboBox1111" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
-                        <Text layoutX="170.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Violation" wrappingWidth="289.974609375">
+                        <ComboBox fx:id="selectedStudentComboBox" layoutX="168.0" layoutY="155.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
+                        <Text layoutX="170.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="editNameField111" layoutX="169.0" layoutY="252.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a violation" />
+                        <ComboBox fx:id="violationComboBox" layoutX="168.0" layoutY="356.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a violation" />
+                        <Text layoutX="170.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Violation" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <DatePicker fx:id="selectDateViolation" layoutX="169.0" layoutY="248.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <Text layoutX="170.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextArea fx:id="violationDescription" layoutX="168.0" layoutY="434.0" prefHeight="150.0" prefWidth="467.0" />
                      </children>
                   </AnchorPane>
                </content>
@@ -478,24 +491,36 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="640.0" prefWidth="830.0" styleClass="anchorpane" stylesheets="@scratch.css">
                      <children>
-                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Violations" wrappingWidth="289.974609375">
+                        <Text layoutX="39.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit an Violation" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
                         <Button layoutX="322.0" layoutY="602.0" mnemonicParsing="false" onAction="#onAddAccount" prefHeight="48.0" prefWidth="182.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Violation" />
-                        <Text layoutX="170.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
+                        <Text layoutX="166.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student Name" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <Text layoutX="170.0" layoutY="226.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Violation" wrappingWidth="289.974609375">
+                        <ComboBox fx:id="editRoleComboBox11112" layoutX="167.0" layoutY="161.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a student" />
+                        <Text layoutX="168.0" layoutY="419.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Description" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="editNameField1111" layoutX="169.0" layoutY="252.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter a violation" />
-                        <TextField fx:id="editNameField11111" layoutX="169.0" layoutY="151.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student name" />
+                        <ComboBox fx:id="editRoleComboBox111111" layoutX="167.0" layoutY="350.0" prefHeight="33.0" prefWidth="443.0" promptText="Select a violation" />
+                        <Text layoutX="166.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of Violation" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <DatePicker fx:id="birthDate11" layoutX="168.0" layoutY="248.0" prefHeight="36.0" prefWidth="441.0" promptText="Select a date" />
+                        <Text layoutX="166.0" layoutY="227.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextArea layoutX="166.0" layoutY="431.0" prefHeight="150.0" prefWidth="467.0" />
                      </children>
                   </AnchorPane>
                </content>

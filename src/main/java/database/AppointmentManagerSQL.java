@@ -28,9 +28,9 @@ public class AppointmentManagerSQL {
 
     public void InsertAppointment(Map<String, Object> appointmentData) {
         String insertAppointment = "INSERT INTO appointment_table (student_name, date_submitted, date_of_appointment, time) VALUES (?, ?, ?, ?)";
-        String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
+        String insertReports = "INSERT INTO reports (description, date, time) VALUES (?, ?, ?)";
         try (var conn = MYSQLConnection.getConnection();
-             var pstmt = conn.prepareStatement(insertAppointment)) {
+             var pstmt = conn.prepareStatement(insertAppointment, java.sql.Statement.RETURN_GENERATED_KEYS)) {
             pstmt.setString(1, (String) appointmentData.get("studentName"));
 
             LocalDate datestr = LocalDate.now();
@@ -43,17 +43,24 @@ public class AppointmentManagerSQL {
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
-                System.out.println("Appointment created successfully.");
-                CustomJDialog.getInstance().showDialog("Appointment Created", "Appointment created successfully.");
+                // Retrieve the generated ID
+                try (var generatedKeys = pstmt.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        int generatedId = generatedKeys.getInt(1);
+                        System.out.println("Appointment created successfully with ID: " + generatedId);
+                        CustomJDialog.getInstance().showDialog("Appointment Created", "Appointment created successfully with ID: " + generatedId);
 
-                try (var pstmtReports = conn.prepareStatement(insertReports)) {
-                    pstmtReports.setString(1, "Appointment with ID " + appointmentData.get("appointmentId") + " was created.");
-                    LocalDate datestrReport = LocalDate.now();
-                    DateTimeFormatter formatterReport = DateTimeFormatter.ofPattern("M/d/yyyy");
-                    String formattedDateReport = datestrReport.format(formatterReport);
-                    pstmtReports.setString(2, formattedDateReport);
-                    pstmtReports.setString(3, java.time.LocalTime.now().toString());
-                    pstmtReports.executeUpdate();
+                        // Insert into reports
+                        try (var pstmtReports = conn.prepareStatement(insertReports)) {
+                            pstmtReports.setString(1, "Appointment with ID " + generatedId + " was created.");
+                            LocalDate datestrReport = LocalDate.now();
+                            DateTimeFormatter formatterReport = DateTimeFormatter.ofPattern("M/d/yyyy");
+                            String formattedDateReport = datestrReport.format(formatterReport);
+                            pstmtReports.setString(2, formattedDateReport);
+                            pstmtReports.setString(3, java.time.LocalTime.now().toString());
+                            pstmtReports.executeUpdate();
+                        }
+                    }
                 }
             } else {
                 System.out.println("Failed to create appointment.");

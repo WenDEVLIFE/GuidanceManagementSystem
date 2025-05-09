@@ -2,6 +2,7 @@ package com.example.guidancemanagementsystem;
 
 import database.AccountManagerSQL;
 import database.StudentManagerSQL;
+import database.ViolationManagerSQL;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -118,6 +119,18 @@ public class GuidanceSystemController {
 
     @FXML
     private TextField editAppointmentTime;
+
+    @FXML
+    private ComboBox<String>  selectedStudentComboBox;
+
+    @FXML
+    private DatePicker selectDateViolation;
+
+    @FXML
+    private ComboBox<String>  violationComboBox;
+
+    @FXML
+    private TextArea violationDescription;
 
     @FXML
     private TabPane tabPane;
@@ -254,6 +267,14 @@ public class GuidanceSystemController {
     public void initialize(){
 
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Student");
+        ObservableList <String> violationList = FXCollections.observableArrayList(
+                "Disobedience/Insubordination 1", "Cheating", "Profanity", "Unauthorized Collaboration", "Disruptin of Class",
+                "Disrespect to Authority", "Disrespect to Peers", "Disruption of Class", "Inappropriate Language",
+                "Inappropriate Behavior", "Inappropriate Attire", "Inappropriate Use of Technology", "Inappropriate Use of Social Media",
+                "Inappropriate Use of School Property", "Inappropriate Use of School Facilities", "Inappropriate Use of School Resources",
+                "Inappropriate Use of School Equipment", "Inappropriate Use of School Supplies", "Inappropriate Use of School Materials",
+                "Inappropriate Use of School Resources", "Inappropriate Use of School Facilities", "Inappropriate Use of School Property", "Others");
+
         roleComboBox.setItems(roles);
         editRoleComboBox.setItems(roles);
 
@@ -286,6 +307,7 @@ public class GuidanceSystemController {
         loadStudent();
 
         studentComboBox.setItems(studentObservableList);
+        selectedStudentComboBox.setItems(studentObservableList);
 
         appointmentTable.getColumns().clear();
         appointmentTable.getItems().clear();
@@ -300,6 +322,8 @@ public class GuidanceSystemController {
         appointmentTable.getColumns().addAll(appointmentIdColumn, appointmentStudentNameColumn, dateSubmittedColumn, appointmentDateColumn, appointmentTimeColumn, appointmentEditColumn, appointmentDeleteColumn);
 
         loadAppointment();
+
+        violationComboBox.setItems(violationList);
     }
 
     public void setStage(Stage stage) {
@@ -434,6 +458,43 @@ public class GuidanceSystemController {
     @FXML
     public void navigateToAddViolation() {
         tabPane.getSelectionModel().select(addViolationTab);
+    }
+
+    @FXML
+    public void addViolation() {
+        String date = selectDateViolation.getEditor().getText(); // Get the date as a string from the DatePicker editor
+        String violation = violationComboBox.getValue();
+        String description = violationDescription.getText();
+        String studentName = selectedStudentComboBox.getValue();
+
+        if (date.isEmpty() || violation == null || description.isEmpty() || studentName == null) {
+            CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
+            return;
+        }
+
+        LocalDate parsedDate;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            parsedDate = LocalDate.parse(date, formatter);
+        } catch (Exception e) {
+            CustomJDialog.getInstance().showDialog("Error", "Invalid date format. Please use MM/dd/yyyy.");
+            return;
+        }
+
+        Map<String, Object> violationData = new HashMap<>();
+        violationData.put("date_of_violation", parsedDate.format(DateTimeFormatter.ofPattern("M/d/yyyy")));
+        violationData.put("violation_type", violation);
+        violationData.put("description", description);
+        violationData.put("student_name", studentName);
+
+        ViolationManagerSQL.getInstance().InsertViolation(violationData);
+
+        // Clear the fields
+        selectDateViolation.getEditor().clear(); // Clear the DatePicker editor
+        violationDescription.clear();
+        selectedStudentComboBox.setValue("Select a student");
+
+        loadStudent();
     }
 
     @FXML
@@ -761,6 +822,7 @@ public class GuidanceSystemController {
     public void loadStudent() {
         studentTable.getItems().clear();
         studentModelObservableList.clear();
+        studentObservableList.clear();
         studentTable.refresh();
 
         try {
@@ -780,6 +842,7 @@ public class GuidanceSystemController {
 
                     // Populate the studentComboBox with student names
                     studentObservableList.add(studentName);
+
                 }
                 studentTable.setItems(studentModelObservableList);
 
