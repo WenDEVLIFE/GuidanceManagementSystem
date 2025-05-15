@@ -3,6 +3,7 @@ module com.example.guidancemanagementsystem {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires org.xerial.sqlitejdbc;
 
 
     opens com.example.guidancemanagementsystem to javafx.fxml;
