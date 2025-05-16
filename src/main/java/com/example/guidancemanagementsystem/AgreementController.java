@@ -32,6 +32,23 @@ public class AgreementController {
         controller.setRole(role);
     }
 
+    @FXML
+    private void disagree() throws IOException {
+        stage.close();
+
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("PEÑARANDA OFF-CAMPUS - SCHOOL GUINDANCE MANAGEMENT SYSTEM - LOGIN");
+        stage.setScene(scene);
+        stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("/com/example/guidancemanagementsystem/images/logo.png")));
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.show();
+
+        HelloController controller = fxmlLoader.getController();
+        controller.setStage(stage);
+    }
+
     public void setStage(Stage stage) {
         this.stage = stage;
     }

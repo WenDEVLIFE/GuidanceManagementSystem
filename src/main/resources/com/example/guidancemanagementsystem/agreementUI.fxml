@@ -50,6 +50,6 @@
          </font>
       </Text>
       <Button layoutX="77.0" layoutY="435.0" mnemonicParsing="false" onAction="#agree" prefHeight="46.0" prefWidth="130.0" styleClass="greenButton" stylesheets="@scratch.css" text="Agree" />
-      <Button layoutX="513.0" layoutY="435.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="130.0" styleClass="deleteButton" stylesheets="@scratch.css" text="Disagree" />
+      <Button layoutX="513.0" layoutY="435.0" mnemonicParsing="false" onAction="#disagree" prefHeight="46.0" prefWidth="130.0" styleClass="deleteButton" stylesheets="@scratch.css" text="Disagree" />
    </children>
 </AnchorPane>

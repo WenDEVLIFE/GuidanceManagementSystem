@@ -371,13 +371,8 @@ public class GuidanceSystemController {
 
         ObservableList<String> roles = FXCollections.observableArrayList("Admin", "Student");
         ObservableList <String> violationList = FXCollections.observableArrayList(
-                "Disobedience/Insubordination 1", "Cheating", "Profanity", "Unauthorized Collaboration", "Disruptin of Class",
-                "Disrespect to Authority", "Disrespect to Peers", "Disruption of Class", "Inappropriate Language",
-                "Inappropriate Behavior", "Inappropriate Attire", "Inappropriate Use of Technology", "Inappropriate Use of Social Media",
-                "Inappropriate Use of School Property", "Inappropriate Use of School Facilities", "Inappropriate Use of School Resources",
-                "Inappropriate Use of School Equipment", "Inappropriate Use of School Supplies", "Inappropriate Use of School Materials",
-                "Inappropriate Use of School Resources", "Inappropriate Use of School Facilities", "Inappropriate Use of School Property", "Others");
-
+                "Cheating" ,"Bullying","Plagiarism", "Cyberbullying","Vilatioon of Dress Code"
+        );
         roleComboBox.setItems(roles);
         editRoleComboBox.setItems(roles);
 
@@ -436,6 +431,7 @@ public class GuidanceSystemController {
         loadAppointment();
 
         violationComboBox.setItems(violationList);
+        editViolationComboBox.setItems(violationList);
 
         violationTable.getColumns().clear();
         violationTable.getItems().clear();
