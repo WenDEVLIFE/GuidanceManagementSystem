@@ -14,13 +14,16 @@ public class StudentModel {
 
     String yearAndSection;
 
-    public  StudentModel(String id, String studentName, String Birthdate, String guardianName, String phoneNumber, String yearAndSection) {
+    String student_id;
+
+    public  StudentModel(String id, String studentName, String Birthdate, String guardianName, String phoneNumber, String yearAndSection, String student_id) {
         this.id = id;
         this.studentName = studentName;
         this.Birthdate = Birthdate;
         this.guardianName = guardianName;
         this.phoneNumber = phoneNumber;
         this.yearAndSection = yearAndSection;
+        this.student_id = student_id;
     }
 
     public String getId() {
@@ -71,6 +74,14 @@ public class StudentModel {
         this.yearAndSection = yearAndSection;
     }
 
+    public String getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(String student_id) {
+        this.student_id = student_id;
+    }
+
 
 
     @Override
@@ -82,6 +93,7 @@ public class StudentModel {
                 ", guardianName='" + guardianName + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", yearAndSection='" + yearAndSection + '\'' +
+                ", student_id='" + student_id + '\'' +
                 '}';
     }
 }

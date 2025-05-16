@@ -149,7 +149,7 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <TableView fx:id="studentTable" layoutX="37.0" layoutY="112.0" prefHeight="486.0" prefWidth="756.0">
+                        <TableView fx:id="studentTable" layoutX="37.0" layoutY="179.0" prefHeight="419.0" prefWidth="756.0">
                            <columns>
                               <TableColumn fx:id="studentIdColumn" prefWidth="79.0" text="ID" />
                               <TableColumn fx:id="studentNameColumn" prefWidth="108.00003051757812" text="Student Name" />
@@ -162,6 +162,8 @@
                            </columns>
                         </TableView>
                         <Button layoutX="350.0" layoutY="626.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Student" />
+                        <TextField layoutX="50.0" layoutY="121.0" prefHeight="48.0" prefWidth="618.0" promptText="Search a student" />
+                        <Button layoutX="676.0" layoutY="121.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -174,8 +176,8 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <Button layoutX="350.0" layoutY="626.0" mnemonicParsing="false" onAction="#navigateToAddAppointment" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Appointment" />
-                        <TableView fx:id="appointmentTable" layoutX="37.0" layoutY="110.0" prefHeight="486.0" prefWidth="756.0">
+                        <Button layoutX="327.0" layoutY="615.0" mnemonicParsing="false" onAction="#navigateToAddAppointment" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Appointment" />
+                        <TableView fx:id="appointmentTable" layoutX="37.0" layoutY="184.0" prefHeight="412.0" prefWidth="756.0">
                            <columns>
                               <TableColumn fx:id="appointmentIdColumn" prefWidth="79.0" text="ID" />
                               <TableColumn fx:id="appointmentStudentNameColumn" prefWidth="103.0" text="Student Name" />
@@ -186,6 +188,8 @@
                               <TableColumn fx:id="appointmentDeleteColumn" prefWidth="102.0" text="Delete" />
                            </columns>
                         </TableView>
+                        <TextField layoutX="41.0" layoutY="123.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an appointment" />
+                        <Button layoutX="668.0" layoutY="123.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children>
                   </AnchorPane>
                </content>
@@ -200,7 +204,7 @@
                            </font>
                         </Text>
                         <Button layoutX="350.0" layoutY="626.0" mnemonicParsing="false" onAction="#navigateToAddViolation" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Violations" />
-                        <TableView fx:id="violationTable" layoutX="37.0" layoutY="110.0" prefHeight="486.0" prefWidth="756.0">
+                        <TableView fx:id="violationTable" layoutX="37.0" layoutY="186.0" prefHeight="410.0" prefWidth="756.0">
                            <columns>
                               <TableColumn fx:id="violationIdColumn" prefWidth="59.33332824707031" text="ID" />
                               <TableColumn fx:id="violationStudentNameColumn" prefWidth="139.33331298828125" text="Student Name" />
@@ -211,6 +215,8 @@
                               <TableColumn fx:id="violationDeleteColumn" prefWidth="81.333251953125" text="Delete" />
                            </columns>
                         </TableView>
+                        <TextField layoutX="41.0" layoutY="119.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an violation" />
+                        <Button layoutX="669.0" layoutY="119.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children>
                   </AnchorPane>
                </content>
@@ -246,7 +252,7 @@
                               <Font name="Segoe UI Bold" size="23.0" />
                            </font>
                         </Text>
-                        <TableView fx:id="accountTable" layoutX="31.0" layoutY="129.0" prefHeight="486.0" prefWidth="756.0">
+                        <TableView fx:id="accountTable" layoutX="31.0" layoutY="183.0" prefHeight="432.0" prefWidth="756.0">
                            <columns>
                               <TableColumn fx:id="userIdColumn" prefWidth="79.0" text="ID" />
                               <TableColumn fx:id="userNameColumn" prefWidth="100.0" text="Username" />
@@ -258,6 +264,8 @@
                            </columns>
                         </TableView>
                         <Button layoutX="327.0" layoutY="637.0" mnemonicParsing="false" onAction="#navigateToAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Create Account" />
+                        <TextField layoutX="37.0" layoutY="116.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an account" />
+                        <Button layoutX="666.0" layoutY="116.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children>
                   </AnchorPane>
                </content>
@@ -454,6 +462,12 @@
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
+                        <TextField fx:id="studentName1" layoutX="170.0" layoutY="584.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student id number" />
+                        <Text layoutX="170.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
                      </children>
                   </AnchorPane>
                </content>
@@ -494,6 +508,12 @@
                         <TextField fx:id="editStudentPhoneNumber" layoutX="169.0" layoutY="388.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter contact number" />
                         <TextField fx:id="editYearAndSection" layoutX="169.0" layoutY="471.0" prefHeight="39.0" prefWidth="440.0" promptText="Enter year and section" />
                         <Text layoutX="170.0" layoutY="455.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year &amp;  Section" wrappingWidth="289.974609375">
+                           <font>
+                              <Font name="Segoe UI Bold" size="15.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="studentName11" layoutX="170.0" layoutY="560.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student id number" />
+                        <Text layoutX="170.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
