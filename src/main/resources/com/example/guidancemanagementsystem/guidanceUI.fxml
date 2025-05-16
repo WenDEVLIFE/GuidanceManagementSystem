@@ -162,8 +162,8 @@
                            </columns>
                         </TableView>
                         <Button layoutX="350.0" layoutY="626.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Add Student" />
-                        <TextField layoutX="50.0" layoutY="121.0" prefHeight="48.0" prefWidth="618.0" promptText="Search a student" />
-                        <Button layoutX="676.0" layoutY="121.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
+                        <TextField fx:id="filterSearchStudent" layoutX="50.0" layoutY="121.0" prefHeight="48.0" prefWidth="618.0" promptText="Search a student" />
+                        <Button layoutX="676.0" layoutY="121.0" mnemonicParsing="false" onAction="#FilterStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children></AnchorPane>
             </content>
           </Tab>
@@ -188,8 +188,8 @@
                               <TableColumn fx:id="appointmentDeleteColumn" prefWidth="102.0" text="Delete" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="41.0" layoutY="123.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an appointment" />
-                        <Button layoutX="668.0" layoutY="123.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
+                        <TextField fx:id="filterSearchAppointment" layoutX="41.0" layoutY="123.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an appointment" />
+                        <Button layoutX="668.0" layoutY="123.0" mnemonicParsing="false" onAction="#FilterAppointment" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children>
                   </AnchorPane>
                </content>
@@ -215,8 +215,8 @@
                               <TableColumn fx:id="violationDeleteColumn" prefWidth="81.333251953125" text="Delete" />
                            </columns>
                         </TableView>
-                        <TextField layoutX="41.0" layoutY="119.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an violation" />
-                        <Button layoutX="669.0" layoutY="119.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
+                        <TextField fx:id="filterSearchViolation" layoutX="41.0" layoutY="119.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an violation" />
+                        <Button layoutX="669.0" layoutY="119.0" mnemonicParsing="false" onAction="#FilterViolation" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children>
                   </AnchorPane>
                </content>
@@ -264,8 +264,8 @@
                            </columns>
                         </TableView>
                         <Button layoutX="327.0" layoutY="637.0" mnemonicParsing="false" onAction="#navigateToAddAccount" prefHeight="48.0" prefWidth="165.0" styleClass="greenButton" stylesheets="@scratch.css" text="Create Account" />
-                        <TextField layoutX="37.0" layoutY="116.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an account" />
-                        <Button layoutX="666.0" layoutY="116.0" mnemonicParsing="false" onAction="#navigateToAddStudent" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
+                        <TextField fx:id="filterSearchAccount" layoutX="37.0" layoutY="116.0" prefHeight="48.0" prefWidth="618.0" promptText="Search an account" />
+                        <Button layoutX="666.0" layoutY="116.0" mnemonicParsing="false" onAction="#FilterAccount" prefHeight="48.0" prefWidth="87.0" styleClass="greenButton" stylesheets="@scratch.css" text="Search" />
                      </children>
                   </AnchorPane>
                </content>

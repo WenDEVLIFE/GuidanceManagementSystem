@@ -158,6 +158,18 @@ public class GuidanceSystemController {
     @FXML
     private ComboBox <String> editViolationComboBox;
 
+    @FXML
+    private TextField filterSearchStudent;
+
+    @FXML
+    private TextField filterSearchAccount;
+
+    @FXML
+    private TextField filterSearchAppointment;
+
+    @FXML
+    private TextField filterSearchViolation;
+
 
     @FXML
     private TabPane tabPane;
@@ -953,6 +965,71 @@ public class GuidanceSystemController {
         loadReport();
         loadCounts();
     }
+
+    @FXML
+    private void FilterStudent() {
+        String filterText = filterSearchStudent.getText();
+        if (filterText.isEmpty()) {
+            studentTable.setItems(studentModelObservableList);
+        } else {
+            ObservableList<StudentModel> filteredList = FXCollections.observableArrayList();
+            for (StudentModel student : studentModelObservableList) {
+                if (student.getStudentName().toLowerCase().contains(filterText.toLowerCase())) {
+                    filteredList.add(student);
+                }
+            }
+            studentTable.setItems(filteredList);
+        }
+    }
+
+    @FXML
+    private void FilterAppointment() {
+        String filterText = filterSearchAppointment.getText();
+        if (filterText.isEmpty()) {
+            appointmentTable.setItems(appointmentModelObservableList);
+        } else {
+            ObservableList<AppointmentModel> filteredList = FXCollections.observableArrayList();
+            for (AppointmentModel appointment : appointmentModelObservableList) {
+                if (appointment.getStudentName().toLowerCase().contains(filterText.toLowerCase())) {
+                    filteredList.add(appointment);
+                }
+            }
+            appointmentTable.setItems(filteredList);
+        }
+    }
+
+    @FXML
+    private void FilterViolation() {
+        String filterText = filterSearchViolation.getText();
+        if (filterText.isEmpty()) {
+            violationTable.setItems(violationModelObservableList);
+        } else {
+            ObservableList<ViolationModel> filteredList = FXCollections.observableArrayList();
+            for (ViolationModel violation : violationModelObservableList) {
+                if (violation.getStudentName().toLowerCase().contains(filterText.toLowerCase())) {
+                    filteredList.add(violation);
+                }
+            }
+            violationTable.setItems(filteredList);
+        }
+    }
+
+    @FXML
+    private void FilterAccount() {
+        String filterText = filterSearchAccount.getText();
+        if (filterText.isEmpty()) {
+            accountTable.setItems(accountModelObservableList);
+        } else {
+            ObservableList<AccountModel> filteredList = FXCollections.observableArrayList();
+            for (AccountModel account : accountModelObservableList) {
+                if (account.getUsername().toLowerCase().contains(filterText.toLowerCase())) {
+                    filteredList.add(account);
+                }
+            }
+            accountTable.setItems(filteredList);
+        }
+    }
+
 
     public void setRole(String role) {
         this.role = role;
