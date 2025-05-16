@@ -151,7 +151,8 @@
                         </Text>
                         <TableView fx:id="studentTable" layoutX="37.0" layoutY="179.0" prefHeight="419.0" prefWidth="756.0">
                            <columns>
-                              <TableColumn fx:id="studentIdColumn" prefWidth="79.0" text="ID" />
+                              <TableColumn fx:id="studentIdColumn" prefWidth="79.0" text="No" />
+                              <TableColumn fx:id="studentIDNumberColumn" prefWidth="88.0" text="Student ID" />
                               <TableColumn fx:id="studentNameColumn" prefWidth="108.00003051757812" text="Student Name" />
                               <TableColumn fx:id="studentBdateColumn" prefWidth="110.666748046875" text="BirthDate" />
                               <TableColumn fx:id="guardianColumn" prefWidth="55.33331298828125" text="Guardian" />

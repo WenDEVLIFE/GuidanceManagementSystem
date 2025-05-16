@@ -250,6 +250,9 @@ public class GuidanceSystemController {
             private TableColumn<StudentModel, String> studentIdColumn;
 
     @FXML
+    private TableColumn<StudentModel, String> studentIDNumberColumn;
+
+    @FXML
             private TableColumn <StudentModel, String> studentNameColumn;
 
 
@@ -395,6 +398,7 @@ public class GuidanceSystemController {
         studentTable.getItems().clear();
 
         studentIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
+        studentIDNumberColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudent_id()));
         studentNameColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStudentName()));
         studentBdateColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBirthdate()));
         guardianColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getGuardianName()));
@@ -403,7 +407,7 @@ public class GuidanceSystemController {
         studentEditColumn.setCellFactory(StudentButton.forTableColumn("Edit", studentTable, studentModelObservableList, this));
         studentDeleteColumn.setCellFactory(StudentButton.forTableColumn("Delete", studentTable, studentModelObservableList, this));
 
-        studentTable.getColumns().addAll(studentIdColumn, studentNameColumn, studentBdateColumn, guardianColumn, studentPnumColumn, yearAndSectionColumn, studentEditColumn, studentDeleteColumn);
+        studentTable.getColumns().addAll(studentIdColumn, studentIDNumberColumn, studentNameColumn, studentBdateColumn, guardianColumn, studentPnumColumn, yearAndSectionColumn, studentEditColumn, studentDeleteColumn);
         loadStudent();
 
         studentComboBox.setItems(studentObservableList);
