@@ -5,11 +5,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
 import javax.swing.*;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -247,13 +251,13 @@ public class GuidanceSystemController {
     private TableView<StudentModel> studentTable;
 
     @FXML
-            private TableColumn<StudentModel, String> studentIdColumn;
+    private TableColumn<StudentModel, String> studentIdColumn;
 
     @FXML
     private TableColumn<StudentModel, String> studentIDNumberColumn;
 
     @FXML
-            private TableColumn <StudentModel, String> studentNameColumn;
+    private TableColumn <StudentModel, String> studentNameColumn;
 
 
     @FXML
@@ -275,23 +279,23 @@ public class GuidanceSystemController {
     private TableColumn <StudentModel, Void> studentDeleteColumn;
 
     @FXML
-            private TableView<AppointmentModel> appointmentTable;
+    private TableView<AppointmentModel> appointmentTable;
 
     @FXML
     private TableView<AppointmentModel> appointmentTable1;
 
 
     @FXML
-            private TableColumn<AppointmentModel, String> appointmentIdColumn;
+    private TableColumn<AppointmentModel, String> appointmentIdColumn;
 
     @FXML
-            private TableColumn<AppointmentModel, String> appointmentStudentNameColumn;
+    private TableColumn<AppointmentModel, String> appointmentStudentNameColumn;
 
     @FXML
     private TableColumn<AppointmentModel, String> appointmentStudentNameColumn1;
 
     @FXML
-            private TableColumn<AppointmentModel, String> appointmentDateColumn;
+    private TableColumn<AppointmentModel, String> appointmentDateColumn;
 
     @FXML
     private TableColumn<AppointmentModel, String> appointmentDateColumn1;
@@ -300,60 +304,60 @@ public class GuidanceSystemController {
     private TableColumn<AppointmentModel, String> dateSubmittedColumn;
 
     @FXML
-            private TableColumn<AppointmentModel, String> appointmentTimeColumn;
+    private TableColumn<AppointmentModel, String> appointmentTimeColumn;
 
     @FXML
     private TableColumn<AppointmentModel, String> appointmentTimeColumn1;
 
     @FXML
-            private TableColumn<AppointmentModel, Void> appointmentEditColumn;
+    private TableColumn<AppointmentModel, Void> appointmentEditColumn;
 
     @FXML
-            private TableColumn<AppointmentModel, Void> appointmentDeleteColumn;
+    private TableColumn<AppointmentModel, Void> appointmentDeleteColumn;
 
     @FXML
-            private TableView<ViolationModel> violationTable;
+    private TableView<ViolationModel> violationTable;
 
     @FXML
-            private TableColumn<ViolationModel, String> violationIdColumn;
+    private TableColumn<ViolationModel, String> violationIdColumn;
 
     @FXML
-            private TableColumn<ViolationModel, String> violationStudentNameColumn;
+    private TableColumn<ViolationModel, String> violationStudentNameColumn;
 
     @FXML
-            private TableColumn<ViolationModel, String> violationDateColumn;
+    private TableColumn<ViolationModel, String> violationDateColumn;
 
     @FXML
-            private TableColumn<ViolationModel, String> violationTypeColumn;
+    private TableColumn<ViolationModel, String> violationTypeColumn;
 
     @FXML
-            private TableColumn<ViolationModel, String> violationDescriptionColumn;
+    private TableColumn<ViolationModel, String> violationDescriptionColumn;
 
     @FXML
-            private TableColumn<ViolationModel, Void> violationEditColumn;
+    private TableColumn<ViolationModel, Void> violationEditColumn;
 
     @FXML
-            private TableColumn<ViolationModel, Void> violationDeleteColumn;
+    private TableColumn<ViolationModel, Void> violationDeleteColumn;
 
     @FXML
-            private TableView<ReportModel> reportTable;
+    private TableView<ReportModel> reportTable;
 
     @FXML
-            private TableColumn<ReportModel, String> reportIdColumn;
+    private TableColumn<ReportModel, String> reportIdColumn;
 
     @FXML
-            private TableColumn<ReportModel, String> reportTimeColumn;
+    private TableColumn<ReportModel, String> reportTimeColumn;
 
     @FXML
-            private TableColumn<ReportModel, String> reportDateColumn;
+    private TableColumn<ReportModel, String> reportDateColumn;
 
     @FXML
-            private TableColumn<ReportModel, String> reportDescriptionColumn;
+    private TableColumn<ReportModel, String> reportDescriptionColumn;
 
     @FXML
-            private TableColumn<ReportModel, Void> reportDeleteColumn;
+    private TableColumn<ReportModel, Void> reportDeleteColumn;
 
-   ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
+    ObservableList <AccountModel> accountModelObservableList = FXCollections.observableArrayList();
 
     ObservableList <StudentModel> studentModelObservableList = FXCollections.observableArrayList();
 
@@ -387,9 +391,9 @@ public class GuidanceSystemController {
         DeleteButtonColumn.setCellFactory(ManageButton.forTableColumn("Delete", accountTable, accountModelObservableList, this));
 
         accountTable.getColumns().addAll(userIdColumn, userNameColumn, userPasswordColumn, userFullNameColumn, userRoleColumn, EditButtonColumn, DeleteButtonColumn);
-         loadAccoountData();
+        loadAccoountData();
 
-         studentTable.getColumns().clear();
+        studentTable.getColumns().clear();
         studentTable.getItems().clear();
 
         studentIdColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getId()));
@@ -783,12 +787,24 @@ public class GuidanceSystemController {
     }
 
     @FXML
-    public void onLogout() {
+    public void onLogout() throws IOException {
         int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Logout", JOptionPane.YES_NO_OPTION);
         if (response == JOptionPane.YES_OPTION) {
 
             System.out.println("User logged out.");
             stage.close();
+
+            FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            stage.setTitle("PEÑARANDA OFF-CAMPUS - SCHOOL GUINDANCE MANAGEMENT SYSTEM - LOGIN");
+            stage.setScene(scene);
+            stage.getIcons().add(new Image(HelloApplication.class.getResourceAsStream("/com/example/guidancemanagementsystem/images/logo.png")));
+            stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.show();
+
+            HelloController controller = fxmlLoader.getController();
+            controller.setStage(stage);
         }
     }
 
@@ -974,7 +990,7 @@ public class GuidanceSystemController {
         } else {
             ObservableList<StudentModel> filteredList = FXCollections.observableArrayList();
             for (StudentModel student : studentModelObservableList) {
-                if (student.getStudentName().toLowerCase().contains(filterText.toLowerCase())) {
+                if (student.getStudentName().toLowerCase().contains(filterText.toLowerCase())||  student .getStudent_id().toLowerCase().contains(filterText.toLowerCase())) {
                     filteredList.add(student);
                 }
             }
@@ -1006,7 +1022,7 @@ public class GuidanceSystemController {
         } else {
             ObservableList<ViolationModel> filteredList = FXCollections.observableArrayList();
             for (ViolationModel violation : violationModelObservableList) {
-                if (violation.getStudentName().toLowerCase().contains(filterText.toLowerCase())) {
+                if (violation.getStudentName().toLowerCase().contains(filterText.toLowerCase()) || violation.getViolationType().toLowerCase().contains(filterText.toLowerCase())) {
                     filteredList.add(violation);
                 }
             }
