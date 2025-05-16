@@ -96,6 +96,9 @@ public class GuidanceSystemController {
     private TextField yearAndSection;
 
     @FXML
+    private TextField studentIDNumbe;
+
+    @FXML
     private  TextField editStudentName;
 
     @FXML
@@ -109,6 +112,9 @@ public class GuidanceSystemController {
 
     @FXML
     private  TextField editYearAndSection;
+
+    @FXML
+    private TextField editStudentIDNumber;
 
     @FXML
     private ComboBox<String> studentComboBox;
@@ -726,8 +732,9 @@ public class GuidanceSystemController {
         String guardian_name = editGuardianName.getText();
         String student_phoneNumber = editStudentPhoneNumber.getText();
         String year_and_section = editYearAndSection.getText();
+        String studentId = editStudentIDNumber.getText();
 
-        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty()) {
+        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty() || studentId.isEmpty()) {
             CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
             return;
         }
@@ -749,6 +756,7 @@ public class GuidanceSystemController {
         studentData.put("phone", student_phoneNumber);
         studentData.put("yearAndSection", year_and_section);
         studentData.put("studentId", studentId);
+        studentData.put("studentNumber", studentId);
 
         StudentManagerSQL.getInstance().updateStudent(studentData);
 
@@ -909,8 +917,9 @@ public class GuidanceSystemController {
         String guardian_name = guardianName.getText();
         String student_phoneNumber = studentPhoneNumber.getText();
         String year_and_section = yearAndSection.getText();
+        String studentId = studentIDNumbe.getText();
 
-        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty()) {
+        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty() || studentId.isEmpty()) {
             CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
             return;
         }
@@ -931,6 +940,7 @@ public class GuidanceSystemController {
         studentData.put("guardian", guardian_name);
         studentData.put("phone", student_phoneNumber);
         studentData.put("yearAndSection", year_and_section);
+        studentData.put("studentNumber", studentId);
 
         StudentManagerSQL.getInstance().InsertStudent(studentData);
 
@@ -1004,8 +1014,9 @@ public class GuidanceSystemController {
                     String guardianName = (String) student.get("guardian");
                     String contactNumber = (String) student.get("contact_number");
                     String yearAndSection = (String) student.get("year_and_section");
+                    String studentNumber = (String) student.get("student_number");
 
-                    StudentModel studentModel = new StudentModel(id, studentName, birthdate, guardianName, contactNumber, yearAndSection);
+                    StudentModel studentModel = new StudentModel(id, studentName, birthdate, guardianName, contactNumber, yearAndSection, studentNumber);
                     studentModelObservableList.add(studentModel);
 
                     // Populate the studentComboBox with student names

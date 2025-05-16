@@ -31,7 +31,7 @@ public class StudentManagerSQL {
     }
 
      public void InsertStudent(Map<String, Object> studentData){
-        String insertStudent = "INSERT INTO students (student_name, birthdate, guardian, contact_number, year_and_section) VALUES (?, ?, ?, ?, ?)";
+        String insertStudent = "INSERT INTO students (student_name, birthdate, guardian, contact_number, year_and_section, student_number) VALUES (?, ?, ?, ?, ?, ?)";
          String insertReports = "INSERT INTO reports  (description, date, time) VALUES (?, ?, ?)";
         try (Connection conn = MYSQLConnection.getConnection();
               PreparedStatement pstmt = conn.prepareStatement(insertStudent)) {
@@ -40,6 +40,7 @@ public class StudentManagerSQL {
              pstmt.setString(3, (String) studentData.get("guardian"));
              pstmt.setString(4, (String) studentData.get("phone"));
                 pstmt.setString(5, (String) studentData.get("yearAndSection"));
+                pstmt.setString(6, (String) studentData.get("studentNumber"));
 
              int rowsAffected = pstmt.executeUpdate();
 
@@ -96,6 +97,7 @@ public class StudentManagerSQL {
                  account.put("contact_number", rs.getString("contact_number"));
                  account.put("birthdate", rs.getString("birthdate"));
                  account.put("year_and_section", rs.getString("year_and_section"));
+                    account.put("student_number", rs.getString("student_number"));
                  accounts.add(account);
              }
              return accounts;
@@ -106,7 +108,7 @@ public class StudentManagerSQL {
      }
 
     public void updateStudent(Map<String, Object> studentData) {
-        String updateStudent = "UPDATE students SET student_name = ?, birthdate = ?, guardian = ?, contact_number = ?, year_and_section = ? WHERE student_id = ?";
+        String updateStudent = "UPDATE students SET student_name = ?, birthdate = ?, guardian = ?, contact_number = ?, year_and_section = ? WHERE student_id = ? WHERE student_number = ?";
         try (Connection conn = MYSQLConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(updateStudent)) {
             pstmt.setString(1, (String) studentData.get("studentName"));
@@ -115,6 +117,7 @@ public class StudentManagerSQL {
             pstmt.setString(4, (String) studentData.get("phone"));
             pstmt.setString(5, (String) studentData.get("yearAndSection"));
             pstmt.setInt(6, Integer.parseInt((String) studentData.get("studentId")));
+            pstmt.setString(7, (String) studentData.get("studentNumber"));
 
             int rowsAffected = pstmt.executeUpdate();
 

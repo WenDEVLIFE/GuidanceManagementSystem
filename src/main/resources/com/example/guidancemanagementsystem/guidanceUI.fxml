@@ -462,7 +462,7 @@
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="studentName1" layoutX="170.0" layoutY="584.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student id number" />
+                        <TextField fx:id="studentIDNumbe" layoutX="170.0" layoutY="584.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student id number" />
                         <Text layoutX="170.0" layoutY="569.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
@@ -512,7 +512,7 @@
                               <Font name="Segoe UI Bold" size="15.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="studentName11" layoutX="170.0" layoutY="560.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student id number" />
+                        <TextField fx:id="editStudentIDNumber" layoutX="170.0" layoutY="560.0" prefHeight="39.0" prefWidth="441.0" promptText="Enter student id number" />
                         <Text layoutX="170.0" layoutY="545.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Student ID" wrappingWidth="289.974609375">
                            <font>
                               <Font name="Segoe UI Bold" size="15.0" />
