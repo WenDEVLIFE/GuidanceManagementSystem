@@ -108,7 +108,7 @@ public class StudentManagerSQL {
      }
 
     public void updateStudent(Map<String, Object> studentData) {
-        String updateStudent = "UPDATE students SET student_name = ?, birthdate = ?, guardian = ?, contact_number = ?, year_and_section = ? WHERE student_id = ? WHERE student_number = ?";
+        String updateStudent = "UPDATE students SET student_name = ?, birthdate = ?, guardian = ?, contact_number = ?, year_and_section = ?, student_number = ? WHERE student_id = ?";
         try (Connection conn = MYSQLConnection.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(updateStudent)) {
             pstmt.setString(1, (String) studentData.get("studentName"));
@@ -116,20 +116,19 @@ public class StudentManagerSQL {
             pstmt.setString(3, (String) studentData.get("guardian"));
             pstmt.setString(4, (String) studentData.get("phone"));
             pstmt.setString(5, (String) studentData.get("yearAndSection"));
-            pstmt.setInt(6, Integer.parseInt((String) studentData.get("studentId")));
-            pstmt.setString(7, (String) studentData.get("studentNumber"));
-
+            pstmt.setString(6, (String) studentData.get("studentNumber"));
+            pstmt.setInt(7, Integer.parseInt(studentData.get("studentId").toString()));
             int rowsAffected = pstmt.executeUpdate();
 
             if (rowsAffected > 0) {
                 System.out.println("Account updated successfully.");
-                CustomJDialog.getInstance().showDialog( "Student Updated", "Student updated successfully.");
+                CustomJDialog.getInstance().showDialog("Student Updated", "Student updated successfully.");
             } else {
-                System.out.println("Failed to update account.");
-                CustomJDialog.getInstance().showDialog( "Student Update Failed", "Failed to update student.");
+                System.out.println("Failed to update student.");
+                CustomJDialog.getInstance().showDialog("Student Update Failed", "Failed to update student.");
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

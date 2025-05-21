@@ -711,6 +711,8 @@ public class GuidanceSystemController {
 
         editYearAndSection.setText(students.getYearAndSection());
 
+        editStudentIDNumber.setText(students.getStudent_id());
+
         // Parse the date in M/d/yyyy format
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 
@@ -748,9 +750,9 @@ public class GuidanceSystemController {
         String guardian_name = editGuardianName.getText();
         String student_phoneNumber = editStudentPhoneNumber.getText();
         String year_and_section = editYearAndSection.getText();
-        String studentId = editStudentIDNumber.getText();
+        String studentNumber = editStudentIDNumber.getText();
 
-        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty() || studentId.isEmpty()) {
+        if (student_name.isEmpty() || date.isEmpty() || guardian_name.isEmpty() || student_phoneNumber.isEmpty() || year_and_section.isEmpty() || studentNumber.isEmpty()) {
             CustomJDialog.getInstance().showDialog("Error", "Please fill all the blanks");
             return;
         }
@@ -772,7 +774,7 @@ public class GuidanceSystemController {
         studentData.put("phone", student_phoneNumber);
         studentData.put("yearAndSection", year_and_section);
         studentData.put("studentId", studentId);
-        studentData.put("studentNumber", studentId);
+        studentData.put("studentNumber", studentNumber);
 
         StudentManagerSQL.getInstance().updateStudent(studentData);
 
